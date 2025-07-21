@@ -33,6 +33,13 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+        
+    Route::get('require-login', function () {
+        return view('auth.require-login', [
+            'message' => 'Anda perlu login untuk mengakses halaman ini',
+            'route' => request()->route ?? 'dashboard'
+        ]);
+    })->name('require-login');
 });
 
 Route::middleware('auth')->group(function () {

@@ -16,7 +16,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.login', [
+            'redirect' => request()->redirect // Tambahkan parameter redirect
+        ]);
     }
 
     /**
@@ -25,10 +27,14 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+        $redirectTo = $request->redirect
+            ? route($request->redirect)
+            : ($user->role === 'admin' ? route('dashboard') : route('layanan.surat-menyurat'));
+
+        return redirect()->to($redirectTo);
     }
 
     /**

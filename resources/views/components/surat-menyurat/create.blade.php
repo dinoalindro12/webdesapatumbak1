@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Detail Surat') }}
+            {{ __('Buat Surat') }}
         </h2>
     </x-slot>
 
@@ -12,7 +12,7 @@
                     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                         <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
                             <h2 class="text-lg font-semibold text-slate-800 dark:text-gray-200">Detail Surat</h2>
-<a href="{{ route('surat-menyurat.index') }}" class="text-white font-medium text-sm bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 rounded-md px-5 py-2.5 transition duration-200">&laquo; Kembali ke Daftar Surat</a>
+                            <a href="{{ route('surat-menyurat.index') }}" class="text-white font-medium text-sm bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:outline-none focus:ring-indigo-300 rounded-md px-5 py-2.5 transition duration-200">&laquo; Kembali ke Daftar Surat</a>
                         </div>
                         <div class="px-6 py-4">
                             <div class="overflow-x-auto">
@@ -54,13 +54,25 @@
                                         </tr>
                                         <tr>
                                             <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Status</td>
-                                            <td class="px-6 py-3">{{ $surat->status }}</td>
+                                            <td class="px-6 py-3">
+                                                <span class="px-2 py-1 font-semibold leading-tight rounded-full 
+                                                    {{ $surat->status == 'Selesai' ? 'text-green-700 bg-green-100 dark:bg-green-700 dark:text-green-100' : 
+                                                       ($surat->status == 'Proses' ? 'text-yellow-700 bg-yellow-100 dark:bg-yellow-700 dark:text-yellow-100' : 
+                                                       'text-red-700 bg-red-100 dark:bg-red-700 dark:text-red-100') }}">
+                                                    {{ $surat->status }}
+                                                </span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="flex flex-col md:flex-row gap-3 pt-6">
-                                <a href="{{ route('surat-menyurat.create', $surat->id) }}" class="bg-slate-600 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-300 rounded-md px-3 py-2 transition duration-200 text-white">Buat</a>
+                                <!-- TOMBOL GENERATE SURAT BARU -->
+                                <a href="{{ route('surat-menyurat.generate', $surat->id) }}" 
+                                   class="bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-md px-3 py-2 transition duration-200 text-white text-center">
+                                    Generate Surat (.docx)
+                                </a>
+
                                 <form action="{{ route('surat-menyurat.destroy', $surat->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

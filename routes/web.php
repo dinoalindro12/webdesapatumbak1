@@ -87,6 +87,10 @@ Route::post('kontak', [KontakController::class, 'store'])->name('kontak.store');
 
 
 // Route untuk surat-menyurat
+Route::get('layanan/surat-menyurat', [SuratController::class, 'create'])
+    ->name('layanan.surat-menyurat');
+
+// Publik: hanya bisa membuat surat
 Route::middleware(['auth', 'verified'])->prefix('surat-menyurat')->group(function () {
     Route::get('/', [SuratController::class, 'index'])->name('surat-menyurat.index');
     Route::post('/', [SuratController::class, 'store'])->name('surat-menyurat.store');
@@ -101,6 +105,8 @@ Route::middleware(['auth', 'verified'])->prefix('kontak')->group(function () {
     Route::get('/{kontak}/show', [KontakController::class, 'edit'])->name('kontak.edit');
     Route::delete('/{kontak}/destroy', [KontakController::class, 'destroy'])->name('kontak.destroy');
     Route::get('kontak/show', [KontakController::class, 'show'])->name('kontak.show');
+    Route::get('/surat-menyurat/{id}/create', [SuratController::class, 'createSurat'])
+    ->name('surat-menyurat.create');
 });
 // Route untuk Dashboard Admin
 Route::middleware(['auth', 'verified'])->group(function () {

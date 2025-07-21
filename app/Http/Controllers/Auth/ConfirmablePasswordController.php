@@ -24,10 +24,12 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if (! Auth::guard('web')->validate([
-            'email' => $request->user()->email,
-            'password' => $request->password,
-        ])) {
+        if (
+            !Auth::guard('web')->validate([
+                'email' => $request->user()->email,
+                'password' => $request->password,
+            ])
+        ) {
             throw ValidationException::withMessages([
                 'password' => __('auth.password'),
             ]);
@@ -45,11 +47,9 @@ class ConfirmablePasswordController extends Controller
     protected function redirectBasedOnRole($user): RedirectResponse
     {
         if ($user->role === 'admin') {
-            return redirect()->intended(route('admin.dashboard', absolute: false));
-            
+            return redirect()->route('dashboard');
         }
 
-        // Untuk admin atau role lain
-        return redirect()->to('/'); // atau route('welcome') jika ada named route
+        return redirect()->route('layanan.surat-menyurat');
     }
 }

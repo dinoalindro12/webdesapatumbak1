@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Surat;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpWord\TemplateProcessor;
+use Carbon\Carbon;
 
 class SuratController extends Controller
 {
     public function create()
     {
+        if (!auth()->check()) {
+            return view('auth.require-login', [
+                'message' => 'Untuk mengakses fitur ini, silahkan login terlebih dahulu',
+                'route' => 'layanan.surat-menyurat'
+            ]);
+        }
         return view('layanan.surat-menyurat');
     }
 
@@ -61,5 +69,51 @@ class SuratController extends Controller
         }
         $surat->delete();
         return redirect()->route('surat-menyurat.index')->with('success', 'Surat berhasil dihapus!');
+    }
+
+    public function showForm()
+    {
+        return view('surat.form');
+    }
+
+    public function createSurat($id)
+    {
+        $surat = Surat::findOrFail($id);
+
+        // Format tanggal lahir
+        $tanggalLahir = $surat->tanggal_lahir
+            ? Carbon::parse($surat->tanggal_lahir)->format('d/m/Y')
+            : '-';
+
+        // Format tanggal buat
+        Carbon::setLocale('id');
+        $tanggalBuat = Carbon::now()->translatedFormat('j F Y');
+
+        // Sesuaikan path template dengan jenis surat
+        $jenisTemplate = strtolower(str_replace(' ', '_', $surat->jenis_surat));
+        $templatePath = storage_path("app/templates/{$jenisTemplate}.docx");
+
+        // Fallback template default jika tidak ada
+        if (!file_exists($templatePath)) {
+            $templatePath = storage_path('app/templates/default.docx');
+        }
+
+        $templateProcessor = new TemplateProcessor($templatePath);
+
+        // Mapping data ke template
+        $templateProcessor->setValue('NAMA', $surat->nama);
+        $templateProcessor->setValue('NIK', $surat->nik);
+        $templateProcessor->setValue('TANGGAL_LAHIR', $tanggalLahir);
+        $templateProcessor->setValue('NO_HP', $surat->no_hp);
+        $templateProcessor->setValue('ALASAN', $surat->alasan ?? '-');
+        $templateProcessor->setValue('TANGGAL_BUAT', $tanggalBuat);
+        $templateProcessor->setValue('JENIS_SURAT', $surat->jenis_surat);
+
+        // Simpan file
+        $fileName = 'Surat_' . $surat->jenis_surat . '_' . $surat->nik . '.docx';
+        $outputPath = storage_path("app/generated/{$fileName}");
+        $templateProcessor->saveAs($outputPath);
+
+        return response()->download($outputPath)->deleteFileAfterSend(true);
     }
 }
