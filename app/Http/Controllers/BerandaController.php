@@ -16,7 +16,7 @@ class BerandaController extends Controller
         
         $beranda = Beranda::orderBy('id','asc')->paginate(10);
         return view('dashboard', compact('beranda'));
-       
+
     } 
     public function create()
 
@@ -74,7 +74,7 @@ class BerandaController extends Controller
 
         $beranda->update($request->all());
 
-        return redirect()->route('components.dashboard.edit')->with('success', 'Data beranda berhasil diperbarui!');
+        return redirect()->route('dashboard.index')->with('success', 'Data beranda berhasil diperbarui!');
     }
     public function berandauser()
     {

@@ -65,37 +65,29 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach($galeri as $p)
+                                    @foreach($galeri as $item)
                                     <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ $loop->iteration }}
-                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->link_video }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->keterangan_video }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->link_video }}
+                                            @if($item->gambar)
+                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Foto" class="w-16 h-16 object-cover rounded-md">
+                                            @else
+                                                <span class="text-gray-500">Tidak ada foto</span>
+                                            @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->keterangan_video }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->foto ? '<img src="' . asset('storage/' . $p->foto) . '" alt="Foto" class="w-16 h-16 object-cover rounded-md">' : '-' }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->keterangan_foto }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->tanggal }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $p->kategori }}
-                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->keterangan_gambar }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->tanggal }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->kategori }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify-end space-x-2">
-                                                <a href="{{ route('galeri.edit', $p->id) }}" class="text-gray-600 hover:text-gray-900" title="Edit">
+                                                <a href="{{ route('galeri.edit', $item->id) }}" class="text-gray-600 hover:text-gray-900" title="Edit">
                                                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('galeri.destroy', $p->id) }}" method="POST" class="inline">
+                                                <form action="{{ route('galeri.destroy', $item->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
@@ -115,11 +107,11 @@
                 </div>
             </div>
             
-            @if($galeri->hasPages())
+            {{-- @if($galeri->hasPages())
             <div class="px-6 py-4 border-t border-gray-200">
                 {{ $galeri->links() }}
             </div>
-            @endif
+            @endif --}}
         </div>
     </div>
 </x-app-layout>

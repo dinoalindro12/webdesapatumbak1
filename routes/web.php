@@ -114,15 +114,16 @@ Route::middleware(['auth', 'verified'])->prefix('kontak')->group(function () {
 });
 // Route untuk Dashboard Admin
 Route::middleware(['auth', 'verified'])->group(function () {
-     Route::resource('dashboard',BerandaController::class);
-    // Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard');
+    Route::resource('/dashboard',BerandaController::class);
+    // Route::get('/dashboard', [BerandaController::class, 'index'])->name('dashboard.index');
     Route::resource('berita', BeritaController::class)->except(['show'])->middleware('auth');
-   
 // controller untuk perangkat desa
     Route::resource('perangkat', PerangkatController::class);
 
 // controller untuk galeri
     Route::resource('galeri', GaleriController::class);
+    Route::get('galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
+    Route::get('galeri/{galeri}/edit', [GaleriController::class, 'edit'])->name('galeri.edit');
     // route untuk agenda
     Route::resource('agenda', AgendaController::class);
     // controller untuk pendidikan
@@ -139,10 +140,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // controller untuk beranda
-    Route::get('beranda/edit', [BerandaController::class, 'edit'])->name('components.dashboard.edit');
-    Route::get('beranda/create', [BerandaController::class, 'create'])->name('components.dashboard.create');
-    Route::post('beranda', [BerandaController::class, 'store'])->name('components.dashboard.store');
-    Route::put('beranda/update/{beranda}', [BerandaController::class, 'update'])->name('components.dashboard.update');
+    // Route::get('beranda/edit', [BerandaController::class, 'edit'])->name('components.dashboard.edit');
+    // Route::get('beranda/create', [BerandaController::class, 'create'])->name('components.dashboard.create');
+    // Route::post('beranda', [BerandaController::class, 'store'])->name('components.dashboard.store');
+    // Route::put('beranda/update/{beranda}', [BerandaController::class, 'update'])->name('components.dashboard.update');
 });
 
 require __DIR__.'/auth.php';
