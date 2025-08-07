@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Galeri extends Model
 {
@@ -14,7 +15,6 @@ class Galeri extends Model
         'link_video',
         'keterangan_video',
         'tanggal',
-        'kategori',
     ];
 
     protected static function boot()

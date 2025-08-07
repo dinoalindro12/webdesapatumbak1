@@ -51,19 +51,6 @@
                         @enderror
                     </div>
 
-                    <!-- Kategori -->
-                    <div>
-                        <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
-                        <select name="kategori" id="kategori" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
-                            <option value="">Pilih Kategori</option>
-                            <option value="foto" {{ old('kategori') == 'foto' ? 'selected' : '' }}>Foto</option>
-                            <option value="video" {{ old('kategori') == 'video' ? 'selected' : '' }}>Video</option>
-                        </select>
-                        @error('kategori')
-                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                     <!-- Tanggal -->
                     <div>
                         <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>

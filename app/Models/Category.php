@@ -10,6 +10,7 @@ class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
+    
     public function Posts():HasMany
     {
         return $this->hasMany(Berita::class, 'category_id');

@@ -70,7 +70,7 @@
                   <div class="py-1">
                     <a href="{{ route('kesehatan.user') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Kesehatan</a>
                     <a href="{{ route('pendidikan.user') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Pendidikan</a>
-                    <a href="{{ route('layanan.pertanian') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">UMKM</a>
+                    <a href="{{ route('umkm.user') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">UMKM</a>
                     <a href="{{ route('layanan.surat-menyurat') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium">Surat Menyurat</a>
                   </div>
                 </div>
@@ -222,7 +222,7 @@
           <div x-show="isLayananOpen" x-collapse class="pl-4 space-y-1">
             <a href="{{ route('kesehatan.user') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Kesehatan</a>
             <a href="{{ route('pendidikan.user') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Pendidikan</a>
-            <a href="{{ route('layanan.pertanian') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">UMKM</a>
+            <a href="{{ route('umkm.user') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">UMKM</a>
             <a href="{{ route('layanan.surat-menyurat') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Surat Menyurat</a>
           </div>
         </div>

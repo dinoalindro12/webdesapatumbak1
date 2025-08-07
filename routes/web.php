@@ -55,7 +55,7 @@ Route::prefix('layanan')->group(function () {
     Route::get('pertanian', function () {
         return view('layanan.pertanian');
     })->name('layanan.pertanian');
-    Route::get('umkm.user', [UmkmController::class, 'umkmuser'])->name('pendidikan.user');
+    Route::get('umkm.user', [UmkmController::class, 'umkmuser'])->name('umkm.user');
 
     Route::get('demografi', function () {
         return view('layanan.pertanian');
@@ -122,8 +122,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // controller untuk galeri
     Route::resource('galeri', GaleriController::class);
-    Route::get('galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
-    Route::get('galeri/{galeri}/edit', [GaleriController::class, 'edit'])->name('galeri.edit');
+    
     // route untuk agenda
     Route::resource('agenda', AgendaController::class);
     // controller untuk pendidikan

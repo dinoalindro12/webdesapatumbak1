@@ -27,11 +27,11 @@ class BerandaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'total_penduduk' => 'required|integer|min:0',
+            'total_penduduk' => 'required|numeric|min:0',
             'anggaran_desa' => 'required|numeric|min:0',
-            'jumlah_program' => 'required|string',
+            'jumlah_program' => 'required|numeric|min:0',
             'aktivitas_terkini' => 'required|string|max:255',
-            'jumlah_umkm' => 'required|integer|min:0',
+            'jumlah_umkm' => 'required|numeric|min:0',
             'prestasi' => 'required|string|max:255',
             'keberhasilan' => 'required|string|max:255',
             'anggaran_terpakai' => 'required|numeric|min:0',
@@ -49,14 +49,14 @@ class BerandaController extends Controller
      */
     public function edit($id)
     {
-         $kesehatan = Kesehatan::findOrFail($id);
+         $beranda = Beranda::findOrFail($id);
         return view('components.dashboard.edit', compact('beranda'));
     }
 
     public function update(Request $request, Beranda $beranda)
     {
         $validator = Validator::make($request->all(), [
-            'total_penduduk' => 'required|integer|min:0',
+            'total_penduduk' => 'required|numeric|min:0',
             'anggaran_desa' => 'required|numeric|min:0',
             'jumlah_program' => 'required|string',
             'aktivitas_terkini' => 'required|string|max:255',
@@ -83,8 +83,9 @@ class BerandaController extends Controller
     
     }
 
-    public function destroy(Beranda $beranda)
+    public function destroy(Beranda $beranda, $id)
     {
+        $beranda = Beranda::findOrFail($id);
         $beranda->delete();
         return redirect()->route('dashboard.index')->with('success', 'Data beranda berhasil dihapus!');
     }

@@ -19,13 +19,11 @@ class Beranda extends Model
         'total_penduduk',
         'anggaran_desa',
         'jumlah_program',
-        'jumlah_penduduk',
         'aktivitas_terkini',
         'jumlah_umkm',
         'prestasi',
         'keberhasilan',
-        'anggaran_terpakai',
-
+        'anggaran_terpakai'
     ];
 
     

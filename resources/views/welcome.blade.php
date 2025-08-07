@@ -4,22 +4,23 @@
         <!-- Hero Section with Image Accordion -->
         <div class="relative overflow-hidden h-screen max-h-[800px]">
             <!-- Slide Accordion Background -->
-            <div class="absolute inset-0 flex">
-                <!-- Slide 1 -->
-                <div class="accordion-slide flex-1 bg-[url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80')] bg-cover bg-center transition-all duration-1000 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
-                </div>
-                
-                <!-- Slide 2 -->
-                <div class="accordion-slide flex-1 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center transition-all duration-1000 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
-                </div>
-                
-                <!-- Slide 3 -->
-                <div class="accordion-slide flex-1 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center transition-all duration-1000 ease-in-out">
-                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
-                </div>
-            </div>
+            <!-- Ganti semua slide dengan format yang konsisten -->
+        <div class="absolute inset-0 flex">
+    <!-- Slide 1 -->
+    <div class="accordion-slide flex-1" style="background-image: url('{{ asset('storage/fotoberanda/1.jpg') }}'); background-size: cover; background-position: center; transition: all 1000ms ease-in-out;">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
+    </div>
+    
+    <!-- Slide 2 -->
+    <div class="accordion-slide flex-1" style="background-image: url('{{ asset('storage/fotoberanda/2.jpg') }}'); background-size: cover; background-position: center; transition: all 1000ms ease-in-out;">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
+    </div>
+    
+    <!-- Slide 3 -->
+    <div class="accordion-slide flex-1" style="background-image: url('{{ asset('storage/fotoberanda/3.jpg') }}'); background-size: cover; background-position: center; transition: all 1000ms ease-in-out;">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-gray-900/40"></div>
+    </div>
+</div>
 
             <!-- Content Container -->
             <div class="max-w-7xl mx-auto relative z-10 text-white h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8">
