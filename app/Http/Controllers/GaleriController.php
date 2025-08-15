@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class GaleriController extends Controller
 {
     // For admin
-    public function index()
+    public function index(Request $request)
     {
-        $galeri = Galeri::latest()->paginate(12);
-        return view('components.galeri.show', compact('galeri'));
+        $type = $request->get('type', 'semua');
+        $galeri = Galeri::latest()
+            ->filterByType($type !== 'semua' ? $type : null)
+            ->paginate(10);
+            
+        return view('components.galeri.index', compact('galeri', 'type'));
     }
 
     public function create()
@@ -22,20 +26,52 @@ class GaleriController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([ // Added missing field
-            'link_video' => 'nullable|string|max:255',
-            'keterangan_video' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'keterangan_gambar' => 'required|string',
+        // Validasi dasar
+        $validated = $request->validate([
+            'type' => 'required|in:foto,video',
             'tanggal' => 'required|date',
         ]);
-        
-        if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+
+        // Validasi conditional berdasarkan type
+        if ($request->type == 'foto') {
+            $fotoValidation = $request->validate([
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'keterangan_gambar' => 'required|string|max:255',
+            ]);
+            $validated = array_merge($validated, $fotoValidation);
+            
+            // Handle upload gambar
+            if ($request->hasFile('gambar')) {
+                $imagePath = $request->file('gambar')->store('galeri', 'public');
+                $validated['gambar'] = $imagePath; // Simpan path gambar
+            }
+            
+            // Set field video ke null
+            $validated['link_video'] = null;
+            $validated['keterangan_video'] = null;
+            
+        } else if ($request->type == 'video') {
+            $videoValidation = $request->validate([
+                'link_video' => 'required|url|max:255',
+                'keterangan_video' => 'required|string|max:255',
+            ]);
+            $validated = array_merge($validated, $videoValidation);
+            
+            // Set field foto ke null
+            $validated['gambar'] = null;
+            $validated['keterangan_gambar'] = null;
         }
 
-        Galeri::create($validated);
-        return redirect()->route('galeri.show')->with('success', 'Konten galeri berhasil ditambahkan!');
+        // Simpan data ke database
+        try {
+            Galeri::create($validated);
+            \Log::info('Data berhasil disimpan');
+        } catch (\Exception $e) {
+            \Log::error('Error menyimpan data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+        }
+        
+        return redirect()->route('galeri.index')->with('success', 'Konten galeri berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -48,27 +84,62 @@ class GaleriController extends Controller
     {
         $galeri = Galeri::findOrFail($id);
         
-        $request->validate([
-            
-            'link_video' => 'nullable|string|max:255',
-            'keterangan_video' => 'nullable|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'keterangan_gambar' => 'required|string|max:255',
+        // Validasi dasar
+        $validated = $request->validate([
+            'type' => 'required|in:foto,video',
             'tanggal' => 'required|date',
         ]);
 
-        $data = $request->all();
-        
-        if ($request->hasFile('gambar')) {
-            // Delete old image if exists
+        // Validasi conditional berdasarkan type
+        if ($request->type == 'foto') {
+            $fotoValidation = $request->validate([
+                'gambar' => $request->hasFile('gambar') ? 'required|image|mimes:jpeg,png,jpg,gif|max:2048' : 'nullable',
+                'keterangan_gambar' => 'required|string|max:255',
+            ]);
+            $validated = array_merge($validated, $fotoValidation);
+            
+            // Handle upload gambar jika ada file baru
+            if ($request->hasFile('gambar')) {
+                // Hapus gambar lama jika ada
+                if ($galeri->gambar) {
+                    Storage::disk('public')->delete($galeri->gambar);
+                }
+                $imagePath = $request->file('gambar')->store('galeri', 'public');
+                $validated['gambar'] = $imagePath;
+            } else {
+                // Pertahankan gambar lama jika tidak ada upload baru
+                $validated['gambar'] = $galeri->gambar;
+            }
+            
+            // Set field video ke null
+            $validated['link_video'] = null;
+            $validated['keterangan_video'] = null;
+            
+        } else if ($request->type == 'video') {
+            $videoValidation = $request->validate([
+                'link_video' => 'required|url|max:255',
+                'keterangan_video' => 'required|string|max:255',
+            ]);
+            $validated = array_merge($validated, $videoValidation);
+            
+            // Hapus gambar lama jika beralih dari foto ke video
             if ($galeri->gambar) {
                 Storage::disk('public')->delete($galeri->gambar);
             }
-            $data['gambar'] = $request->file('gambar')->store('galeri', 'public');
+            
+            // Set field foto ke null
+            $validated['gambar'] = null;
+            $validated['keterangan_gambar'] = null;
         }
 
-        // Get the updated model instance
-        $galeri->fill($data)->save();
+        // Update data
+        try {
+            $galeri->update($validated);
+            \Log::info('Data berhasil diupdate');
+        } catch (\Exception $e) {
+            \Log::error('Error mengupdate data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal mengupdate data: ' . $e->getMessage());
+        }
         
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui!');
     }
@@ -87,16 +158,15 @@ class GaleriController extends Controller
         return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus!');
     }
 
-    public function show($id)
-    {
-        $galeri = Galeri::findOrFail($id);
-        return view('components.galeri.show', compact('galeri'));
-    }
-
     // For public users
-    public function indexUser()
+    public function indexUser(Request $request)
     {
-        $galeri = Galeri::latest()->where('is_public', true)->paginate(12);
-        return view('galeri.index', compact('galeri'));
+        $type = $request->get('type', 'semua');
+        
+        $galeri = Galeri::latest()
+            ->filterByType($type !== 'semua' ? $type : null)
+            ->paginate(12);
+        
+        return view('galeri.index', compact('galeri', 'type'));
     }
 }

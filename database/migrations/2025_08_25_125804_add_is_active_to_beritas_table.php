@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengumuman', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul')->unique();
-            $table->text('isi');
-            $table->date('tanggal');
-            $table->timestamps();
+        Schema::table('beritas', function (Blueprint $table) {
+            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengumuman');
+        Schema::table('beritas', function (Blueprint $table) {
+            $table->dropColumn('is_active');
+        });
     }
 };

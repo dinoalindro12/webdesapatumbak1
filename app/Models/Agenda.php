@@ -9,4 +9,11 @@ class Agenda extends Model
 {
     /** @use HasFactory<\Database\Factories\AgendaFactory> */
     use HasFactory;
+    protected $fillable = [
+        'nama_proyek',
+        'waktu_mulai',
+        'besar_anggaran',
+        'ukuran_proyek',
+        'status',
+    ];
 }

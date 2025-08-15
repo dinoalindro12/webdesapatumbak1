@@ -8,12 +8,12 @@
             <span class="sr-only">Kembali</span>
         </a>
 
-        <!-- Minimalist Logo -->
+        <!-- Minimalist Logo
         <div class="mb-10 mt-6">
             <a href="{{ url('/') }}" class="flex items-center justify-center">
                 <x-application-logo class="w-14 h-14 text-blue-600" />
             </a>
-        </div>
+        </div> -->
 
         <!-- Elevated Card -->
         <div class="w-full sm:max-w-md px-6 py-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100">

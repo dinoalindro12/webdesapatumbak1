@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 
 class PengumumanController extends Controller
@@ -11,7 +11,8 @@ class PengumumanController extends Controller
      */
     public function index()
     {
-        //
+        $pengumuman = Pengumuman::latest()->paginate(10);
+        return view('components.pengumuman.index', compact('pengumuman'));
     }
 
     /**
@@ -19,7 +20,7 @@ class PengumumanController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.pengumuman.create');
     }
 
     /**
@@ -27,7 +28,13 @@ class PengumumanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'tanggal' => 'required|date',
+        ]);
+        Pengumuman::create($validated);
+        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
     /**
@@ -43,7 +50,8 @@ class PengumumanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pengumuman = Pengumuman::findOrFail($id);
+        return view('components.pengumuman.edit', compact('pengumuman'));
     }
 
     /**
@@ -51,7 +59,14 @@ class PengumumanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'tanggal' => 'required|date',
+        ]);
+        $pengumuman = Pengumuman::findOrFail($id);
+        $pengumuman->update($validated);
+        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil diperbarui!');
     }
 
     /**
@@ -59,11 +74,14 @@ class PengumumanController extends Controller
      */
     public function destroy(string $id)
     {
-        
+        $pengumuman = Pengumuman::findOrFail($id);
+        $pengumuman->delete();
+        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil dihapus!');
     }
 
     public function pengumumanuser()
     {
-        return view('berita-kegiatan.pengumuman');
+        $pengumuman = Pengumuman::paginate(10);
+        return view('berita-kegiatan.pengumuman', compact('pengumuman'));
     }
 }

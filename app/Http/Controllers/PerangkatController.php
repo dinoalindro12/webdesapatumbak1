@@ -39,7 +39,7 @@ class PerangkatController extends Controller
         }
 
         Perangkat::create($validated);
-        return redirect()->route('perangkat.index')->with('success', 'Data perangkat berhasil ditambahkan.');
+        return redirect()->route('perangkat.show')->with('success', 'Data perangkat berhasil ditambahkan.');
     }
 
     // Tampilkan detail perangkat (opsional, bisa diisi jika ingin detail)
@@ -75,14 +75,14 @@ class PerangkatController extends Controller
         }
 
         $perangkat->update($validated);
-        return redirect()->route('perangkat.index')->with('success', 'Data perangkat berhasil diupdate.');
+        return redirect()->route('perangkat.show')->with('success', 'Data perangkat berhasil diupdate.');
     }
 
     // Hapus perangkat
     public function destroy(Perangkat $perangkat)
     {
         $perangkat->delete();
-        return redirect()->route('perangkat.index')->with('success', 'Data perangkat berhasil dihapus.');
+        return redirect()->route('perangkat.show')->with('success', 'Data perangkat berhasil dihapus.');
     }
 
     // Struktur organisasi (frontend)

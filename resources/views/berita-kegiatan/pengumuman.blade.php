@@ -1,141 +1,94 @@
-<x-layout title="Pengumuman Desa">
-    <div class="bg-gray-100 py-8">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<x-layout title="Papan Pengumuman Desa Sukamaju">
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Section -->
             <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-gray-900 font-chalk">Papan Pengumuman Desa</h1>
-                <div class="w-32 h-2 bg-green-700 mx-auto mt-4 rounded-full opacity-80"></div>
-                <p class="text-gray-900 mt-4 font-chalk">Informasi penting untuk warga Desa Sukamaju</p>
+                <h1 class="text-4xl font-serif font-light text-gray-900">Papan Pengumuman Desa Sukamaju</h1>
+                <div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Informasi resmi dan pengumuman terbaru dari Pemerintah Desa Sukamaju</p>
             </div>
 
-            <!-- Papan Tulis -->
-            <div class="bg-gray-300 rounded-lg shadow-xl overflow-hidden mb-12 border-8 border-gray-500">
-                <!-- Header Papan Tulis -->
-                <div class="bg-gray-300 px-6 py-3 flex items-center rounded-lg">
-                    <div class="flex space-x-2">
-                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <div class="ml-4 text-gray-900 text-sm font-medium">PENGUMUMAN DESA SUKAMAJU</div>
-                </div>
-                
-                <!-- Isi Papan Tulis -->
-                <div class="bg-gray-300 p-6 min-h-[500px] font-chalk">
-                    <!-- Pengumuman Penting -->
-                    <div class="mb-8 p-4 border-l-4 border-gray-400 bg-green-600 bg-opacity-30 rounded-r-lg">
-                        <div class="flex items-center mb-2">
-                            <svg class="h-6 w-6 text-black mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            <h2 class="text-2xl text-gray-900 font-bold">PENGUMUMAN PENTING!</h2>
+            <!-- Main Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Recent Announcements Sidebar -->
+                <div class="lg:col-span-1 order-2 lg:order-1">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-6">
+                        <div class="bg-gray-800 text-white px-6 py-4">
+                            <h2 class="text-xl font-medium">
+                                <span class="font-serif">Pengumuman Terkini</span>
+                            </h2>
                         </div>
-                        <p class="text-gray-900 text-lg mb-3">PEMADAMAN LISTRIK BERGILIR</p>
-                        <p class="text-gray-900 mb-2">Akan dilakukan pemadaman listrik bergilir pada:</p>
-                        <ul class="text-gray-900 list-disc pl-5 mb-3 space-y-1">
-                            <li>Tanggal: 15-17 Juni 2023</li>
-                            <li>Pukul: 08.00 - 16.00 WIB</li>
-                            <li>Wilayah: RT 01 s/d RT 05</li>
-                        </ul>
-                        <p class="text-gray-900">Harap mempersiapkan kebutuhan listrik selama pemadaman.</p>
-                    </div>
-
-                    <!-- Daftar Pengumuman -->
-                    <div class="space-y-6">
-                        <!-- Pengumuman 1 -->
-                        <div class="p-4 border-b-2 border-green-600 border-dashed">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-xl text-gray-900 font-bold mb-2">JADWAL POSYANDU BULAN INI</h3>
-                                <span class="text-gray-900 text-sm">12 Juni 2023</span>
+                        <div class="p-4 space-y-4">
+                            @foreach($pengumuman->take(5) as $event)
+                            <div class="border-l-4 border-green-600 rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow bg-white">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-medium text-gray-800 line-clamp-1">{{ $event->judul }}</h3>
+                                        <span class="text-sm text-gray-500 whitespace-nowrap ml-2">
+                                            {{ \Carbon\Carbon::parse($event->tanggal)->format('d M') }}
+                                        </span>
+                                    </div>
+                                    <p class="mt-2 text-gray-600 line-clamp-2">{{ strip_tags($event->isi) }}</p>
+                                    <a href="#pengumuman-{{ $event->id }}" class="mt-2 inline-block text-sm text-green-600 hover:text-green-500">
+                                        Baca selengkapnya →
+                                    </a>
+                                </div>
                             </div>
-                            <p class="text-gray-900 mb-2">Posyandu Melati akan dilaksanakan pada:</p>
-                            <ul class="text-gray-900 list-disc pl-5 mb-2 space-y-1">
-                                <li>Tanggal: 15 Juni 2023</li>
-                                <li>Pukul: 08.00 - 12.00 WIB</li>
-                                <li>Tempat: Balai RT 03</li>
-                            </ul>
-                            <p class="text-gray-900">Bawa buku KMS dan kartu peserta.</p>
-                        </div>
-
-                        <!-- Pengumuman 2 -->
-                        <div class="p-4 border-b-2 border-green-600 border-dashed">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-xl text-gray-900 font-bold mb-2">GOTONG ROYONG BERSIH DESA</h3>
-                                <span class="text-gray-900 text-sm">10 Juni 2023</span>
-                            </div>
-                            <p class="text-gray-900 mb-2">Akan dilaksanakan kegiatan gotong royong bersih desa:</p>
-                            <ul class="text-gray-900 list-disc pl-5 mb-2 space-y-1">
-                                <li>Tanggal: 18 Juni 2023</li>
-                                <li>Pukul: 07.00 WIB</li>
-                                <li>Tempat: Lapangan Desa</li>
-                            </ul>
-                            <p class="text-gray-900">Setiap KK wajib mengirim 1 orang perwakilan.</p>
-                        </div>
-
-                        <!-- Pengumuman 3 -->
-                        <div class="p-4 border-b-2 border-green-600 border-dashed">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-xl text-gray-900 font-bold mb-2">PENDAFTARAN BANTUAN PKH</h3>
-                                <span class="text-gray-900 text-sm">8 Juni 2023</span>
-                            </div>
-                            <p class="text-gray-900 mb-2">Pendaftaran Program Keluarga Harian (PKH) dibuka untuk:</p>
-                            <ul class="text-gray-900 list-disc pl-5 mb-2 space-y-1">
-                                <li>Keluarga dengan balita</li>
-                                <li>Lansia di atas 70 tahun</li>
-                                <li>Penyandang disabilitas</li>
-                            </ul>
-                            <p class="text-gray-900">Bawa fotokopi KK, KTP, dan dokumen pendukung ke kantor desa.</p>
-                        </div>
-
-                        <!-- Pengumuman 4 -->
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-xl text-gray-900 font-bold mb-2">PELATIHAN KEWIRAUSAHAAN</h3>
-                                <span class="text-gray-900 text-sm">5 Juni 2023</span>
-                            </div>
-                            <p class="text-gray-900 mb-2">Dinas Koperasi & UMKM Kabupaten akan menyelenggarakan:</p>
-                            <ul class="text-gray-900 list-disc pl-5 mb-2 space-y-1">
-                                <li>Tanggal: 20-22 Juni 2023</li>
-                                <li>Pukul: 09.00 - 15.00 WIB</li>
-                                <li>Tempat: Aula Kantor Desa</li>
-                            </ul>
-                            <p class="text-gray-900">Gratis untuk warga desa. Daftar ke Pak RT masing-masing.</p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Info Tambahan -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Informasi Penting</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border-l-4 border-red-500 pl-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Pengumuman Darurat</h3>
-                        <p class="text-gray-600">Untuk pengumuman darurat, akan disampaikan melalui pengeras suara masjid dan grup WhatsApp RT/RW.</p>
-                    </div>
-                    <div class="border-l-4 border-blue-500 pl-4">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Verifikasi Data</h3>
-                        <p class="text-gray-600">Warga dimohon memverifikasi data keluarga di kantor desa untuk keperluan bantuan sosial.</p>
+                <!-- All Announcements -->
+                <div class="lg:col-span-2 order-1 lg:order-2">
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="bg-gray-800 text-white px-6 py-4">
+                            <h2 class="text-xl font-medium">
+                                <span class="font-serif">Seluruh Pengumuman</span>
+                            </h2>
+                        </div>
+                        
+                        <div class="p-6 space-y-8">
+                            @foreach($pengumuman as $event)
+                            <div id="pengumuman-{{ $event->id }}" class="group">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 bg-green-100 rounded-lg p-3 mr-4">
+                                        <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="text-xl font-medium text-gray-900 group-hover:text-green-600 transition-colors">
+                                                {{ $event->judul }}
+                                            </h3>
+                                            <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                                                {{ \Carbon\Carbon::parse($event->tanggal)->format('d F Y') }}
+                                            </span>
+                                        </div>
+                                        <div class="mt-4 prose max-w-none text-gray-600">
+                                            {!! $event->isi !!}
+                                        </div>
+                                        <div class="mt-4 pt-4 border-t border-gray-100 flex items-center text-sm text-gray-500">
+                                            <svg class="flex-shrink-0 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            Dipublikasikan pada {{ \Carbon\Carbon::parse($event->tanggal)->format('l, d F Y') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        @if($pengumuman->hasPages())
+                        <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                            {{ $pengumuman->links() }}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Chalk Font Style -->
-    <style>
-        .font-chalk {
-            font-family: 'Courier New', Courier, monospace;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        .bg-green-700 {
-            background-color: #313b59;
-        }
-        .bg-green-800 {
-            background-color: #313b59;
-        }
-        .bg-green-900 {
-            background-color: #313b59;
-        }
-    </style>
 </x-layout>

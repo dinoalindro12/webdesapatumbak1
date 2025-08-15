@@ -3,9 +3,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Elegant Header Section -->
             <div class="text-center mb-16">
-                <h1 class="text-4xl font-light tracking-wide text-gray-800 mb-4">Berita Terkini Desa Sukamaju</h1>
+                <h1 class="text-4xl font-light tracking-wide text-gray-800 mb-4">Berita Terkini Desa Patumbak 1</h1>
                 <div class="w-24 h-0.5 bg-gray-300 mx-auto mb-4"></div>
-                <p class="text-gray-500 font-light text-lg">Informasi terupdate seputar kegiatan dan perkembangan desa</p>
+                <p class="text-gray-500 font-light text-lg">Informasi seputar kegiatan dan perkembangan desa</p>
             </div>
 
             <!-- Sophisticated Filter and Search -->
@@ -14,10 +14,10 @@
                     <label for="category" class="sr-only">Kategori</label>
                     <select id="category" name="category" class="block w-full rounded-sm border-gray-200 shadow-sm focus:border-gray-400 focus:ring-gray-400 text-sm bg-gray-100 text-gray-700 h-10 px-3">
                         <option value="">Semua Kategori</option>
-                        <option value="Pemerintahan" {{ (request('category') == 'Pemerintahan') ? 'selected' : '' }}>Pemerintahan</option>
-                        <option value="Kesehatan" {{ (request('category') == 'Kesehatan') ? 'selected' : '' }}>Kesehatan</option>
-                        <option value="Pendidikan" {{ (request('category') == 'Pendidikan') ? 'selected' : '' }}>Pendidikan</option>
-                        <option value="Ekonomi" {{ (request('category') == 'Ekonomi') ? 'selected' : '' }}>Ekonomi</option>
+                        <option value="Pemerintahan" {{ (request('category') == 'pemerintahan') ? 'selected' : '' }}>Pemerintahan</option>
+                        <option value="Kesehatan" {{ (request('category') == 'kesehatan') ? 'selected' : '' }}>Kesehatan</option>
+                        <option value="Pendidikan" {{ (request('category') == 'pendidikan') ? 'selected' : '' }}>Pendidikan</option>
+                        <option value="Ekonomi" {{ (request('category') == 'ekonomi') ? 'selected' : '' }}>Ekonomi</option>
                     </select>
                 </div>
                 <div class="relative w-full md:w-72">
@@ -40,8 +40,8 @@
                     <!-- Image with elegant overlay -->
                     <div class="h-60 overflow-hidden relative">
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/30 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        @if ($post->image && file_exists(public_path('storage/berita-images/' . $post->image)))
-                            <img src="{{ asset('storage/berita-images/' . $post->image) }}" 
+                        @if ($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" 
                                 alt="{{ $post->title }}" 
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         @else
@@ -50,20 +50,20 @@
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         @endif
                         <!-- Category badge -->
-                        <span class="absolute top-4 right-4 bg-gray-800/90 text-gray-100 text-xs px-3 py-1 uppercase tracking-wider z-20">Berita Desa</span>
+                        <span class="absolute top-4 right-4 bg-gray-800/90 text-gray-100 text-xs px-3 py-1 uppercase tracking-wider z-20">{{ $post->kategori }}</span>
                     </div>
                     
                     <!-- Content -->
                     <div class="p-6">
                         <div class="flex items-center text-xs text-gray-400 mb-3 space-x-3 tracking-wide">
-                            <span>{{ $post->date }}</span>
+                            <span>{{ \Carbon\Carbon::parse($post->date)->format('d M Y') }}</span>
                             <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
                             <span class="font-medium text-gray-500">{{ $post->author->name }}</span>
                         </div>
                         <h2 class="text-xl font-normal text-gray-800 mb-3 leading-snug">
                             <a href="{{ route('berita-kegiatan.show', $post->slug) }}" class="hover:text-gray-600 transition-colors duration-200">{{ $post->title }}</a>
                         </h2>
-                        <p class="text-gray-500 mb-5 font-light text-sm leading-relaxed">{{ Str::limit($post->body, 100) }}</p>
+                        <p class="text-gray-500 mb-5 font-light text-sm leading-relaxed">{{ Str::limit(strip_tags($post->body), 100) }}</p>
                         <a href="{{ route('berita-kegiatan.show', $post->slug) }}" 
                         class="inline-flex items-center text-gray-700 hover:text-gray-900 font-medium text-sm group-hover:underline transition-colors duration-200">
                             Baca selengkapnya
@@ -78,38 +78,38 @@
 
             <!-- Minimalist Pagination -->
             <div class="flex items-center justify-center space-x-2 pt-8 border-t border-gray-100">
-    {{-- Previous Page Link --}}
-    <a 
-        href="{{ $posts->previousPageUrl() }}" 
-        class="px-3 py-1 rounded-md {{ $posts->onFirstPage() ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100' }}"
-    >
-        &larr;
-    </a>
+                {{-- Previous Page Link --}}
+                <a 
+                    href="{{ $posts->previousPageUrl() }}" 
+                    class="px-3 py-1 rounded-md {{ $posts->onFirstPage() ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100' }}"
+                >
+                    &larr;
+                </a>
 
-    {{-- Pagination Elements --}}
-    @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
-        @if ($page == $posts->currentPage())
-            <span class="px-3 py-1 rounded-md bg-blue-600 text-white font-medium">
-                {{ $page }}
-            </span>
-        @else
-            <a 
-                href="{{ $url }}" 
-                class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-100"
-            >
-                {{ $page }}
-            </a>
-        @endif
-    @endforeach
+                {{-- Pagination Elements --}}
+                @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $page => $url)
+                    @if ($page == $posts->currentPage())
+                        <span class="px-3 py-1 rounded-md bg-blue-600 text-white font-medium">
+                            {{ $page }}
+                        </span>
+                    @else
+                        <a 
+                            href="{{ $url }}" 
+                            class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-100"
+                        >
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
 
-    {{-- Next Page Link --}}
-    <a 
-        href="{{ $posts->nextPageUrl() }}" 
-        class="px-3 py-1 rounded-md {{ !$posts->hasMorePages() ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100' }}"
-    >
-        &rarr;
-    </a>
-</div>
+                {{-- Next Page Link --}}
+                <a 
+                    href="{{ $posts->nextPageUrl() }}" 
+                    class="px-3 py-1 rounded-md {{ !$posts->hasMorePages() ? 'text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100' }}"
+                >
+                    &rarr;
+                </a>
+            </div>
         </div>
     </div>
 </x-layout>

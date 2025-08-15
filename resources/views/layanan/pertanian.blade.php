@@ -339,15 +339,17 @@
                     <h3 class="text-2xl font-semibold text-center text-gray-800 mb-8">Produk Unggulan UMKM</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                         <!-- Kerajinan -->
+                        @foreach($umkm as $item)
                         <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-200">
                             <div class="h-32 bg-gray-100 flex items-center justify-center p-4">
-                                <img src="{{ asset('images/kerajinan.png') }}" alt="Kerajinan" class="h-20 object-contain">
+                                <img src="{{ $item->foto }}" alt="Kerajinan" class="h-20 object-contain">
                             </div>
                             <div class="p-4 text-center">
-                                <h4 class="font-medium text-gray-800">Kerajinan Tangan</h4>
+                                <h4 class="font-medium text-gray-800">{{$item->nama_usaha}}</h4>
                                 <p class="text-sm text-gray-600 mt-1">Anyaman dan ukiran khas</p>
                             </div>
                         </div>
+                        @endforeach
                         
                         <!-- Makanan -->
                         <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-200">

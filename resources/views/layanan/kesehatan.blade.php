@@ -1,7 +1,7 @@
 <x-layout title="Layanan Kesehatan">
     <!-- Hero Section with Visual Impact -->
     <div class="relative bg-gray-900 text-white py-24 overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center opacity-40"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('{{ asset('images/pustu.jpg') }}');"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-6 font-serif">Layanan Kesehatan <span class="text-gray-300">Desa Patumbak 1</span></h1>
@@ -170,14 +170,14 @@
     </div>
 
     <!-- Medical Team Section with Visual Impact -->
-    <div class="py-16 bg-gray-800 text-white">
+    {{-- <div class="py-16 bg-gray-800 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold mb-4">Tim Medis Profesional Kami</h2>
                 <p class="text-gray-300 max-w-2xl mx-auto">Dokter, bidan, dan tenaga medis berpengalaman siap melayani Anda</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {{-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Doctor 1 -->
                 <div class="bg-gray-700 rounded-xl overflow-hidden shadow-xl transform transition-all hover:scale-105">
                     <div class="h-64 bg-[url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80')] bg-cover bg-center relative">
@@ -257,9 +257,9 @@
                         <p class="text-gray-300">Pelayanan transportasi medis darurat</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div> --}}
+        {{-- </div>
+    </div> --}} 
 
     <!-- Stats and Schedule Section -->
     <div class="py-16 bg-white">
@@ -290,6 +290,8 @@
 
                 <!-- Schedule -->
                 <div>
+                   
+                    
                     <h2 class="text-2xl font-bold text-gray-800 mb-8">Jadwal Layanan</h2>
                     <div class="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200">
@@ -301,12 +303,13 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
+                                 @foreach ($kesehatann as $item )
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Pengobatan Lansia</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Kamis</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">08.00 - 12.00</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$item->nama_program}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{$item->tanggal_pelayanan}}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{$item->jam_pelayanan}}</td>
                                 </tr>
-                                <tr class="hover:bg-gray-50">
+                                {{-- <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Posyandu</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Selasa</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">09.00 - 14.00</td>
@@ -320,10 +323,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ambulance</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Setiap Hari</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">24 Jam</td>
-                                </tr>
+                                </tr> --}}
+                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                    
                 </div>
             </div>
         </div>

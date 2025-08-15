@@ -3,11 +3,15 @@
     <div class="relative h-96 overflow-hidden bg-gray-900">
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <img 
-                src="{{ asset('storage/berita-images/' . $post->image) }}" 
-                alt="{{ $post->title }}"
-                class="w-full h-full object-cover opacity-70 transform scale-100 hover:scale-105 transition-transform duration-1000"
-            >
+             @if ($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" 
+                                alt="{{ $post->title }}" 
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+                                alt="Default Image"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        @endif
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent"></div>
         </div>
         

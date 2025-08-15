@@ -138,8 +138,8 @@
 
                 <div x-show="activeMenu === 'perangkat'" x-collapse
                     class="space-y-1 pl-14 overflow-hidden transition-all duration-300">
-                    <a href="{{ route('perangkat.index') }}"
-                        class="block px-4 py-2 text-sm rounded-lg transition-colors duration-200 hover:bg-gray-50 truncate {{ request()->routeIs('perangkat.index') ? 'text-yellow-600 font-medium' : 'text-gray-500' }}">
+                    <a href="{{ route('perangkat.show') }}"
+                        class="block px-4 py-2 text-sm rounded-lg transition-colors duration-200 hover:bg-gray-50 truncate {{ request()->routeIs('perangkat.show') ? 'text-yellow-600 font-medium' : 'text-gray-500' }}">
                         Daftar Perangkat
                     </a>
                     <a href="{{ route('perangkat.create') }}"

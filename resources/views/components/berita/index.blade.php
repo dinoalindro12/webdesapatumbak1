@@ -72,6 +72,24 @@
                                                                                     </li>
                                             @endforeach
                                         </ul>
+                                        <h6 class="mb-2 mt-4 text-sm font-medium text-gray-900">Filter Status</h6>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-center">
+                                                <input id="status-all" type="radio" name="status" value="" {{
+    !request('status') ? 'checked' : '' }} class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                                <label for="status-all" class="ml-2 text-sm text-gray-700">Semua Status</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="status-active" type="radio" name="status" value="active" {{
+    request('status') == 'active' ? 'checked' : '' }} class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                                <label for="status-active" class="ml-2 text-sm text-gray-700">Aktif</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="status-inactive" type="radio" name="status" value="inactive" {{
+    request('status') == 'inactive' ? 'checked' : '' }} class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                                <label for="status-inactive" class="ml-2 text-sm text-gray-700">Non-Aktif</label>
+                                            </li>
+                                        </ul>
                                         <input type="hidden" name="search" value="{{ request('search') }}">
                                         <button type="submit"
                                             class="mt-3 w-full px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition duration-200">Terapkan</button>
@@ -107,68 +125,96 @@
                                     Kategori</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse ($posts as $post)
-                                                    <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $post->id
-                                                            }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            {{ $post->title }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 max-w-xs truncate"
-                                                            title="{{ $post->body }}">{{
-                                Str::limit($post->body, 10) }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            {{ $post->date }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            {{ $post->author->name }}</td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            <span
-                                                                class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{
-                                $post->kategori }}</span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                            <div class="flex justify-end">
-                                                                <div x-data="{ open{{ $post->id }}: false }" class="relative">
-                                                                    <button @click="open{{ $post->id }} = !open{{ $post->id }}"
-                                                                        class="text-gray-400 hover:text-gray-600 p-1 rounded-md hover:bg-gray-100 transition duration-150">
-                                                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                                                            <path
-                                                                                d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                                        </svg>
-                                                                    </button>
-
-                                                                    <!-- Dropdown Menu -->
-                                                                    <div x-show="open{{ $post->id }}" @click.away="open{{ $post->id }} = false"
-                                                                        class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200">
-                                                                        <ul class="py-1">
-                                                                            <li>
-                                                                                <a href="#"
-                                                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Lihat</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#"
-                                                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Edit</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <form action="#" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="submit"
-                                                                                        class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Hapus</button>
-                                                                                </form>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $post->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $post->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 max-w-xs truncate"
+                                        title="{{ $post->body }}">{{
+                                        Str::limit($post->body, 50) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ \Carbon\Carbon::parse($post->date)->format('d M Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ $post->author->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <span
+                                            class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">{{
+                                        $post->kategori }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        @if($post->is_active)
+                                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Aktif</span>
+                                        @else
+                                            <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded">Non-Aktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <!-- Lihat Button -->
+                                            <a href="{{ route('berita-kegiatan.show', $post->slug) }}" target="_blank"
+                                                class="text-blue-600 hover:text-blue-900 p-1 rounded-md hover:bg-blue-100 transition duration-150"
+                                                title="Lihat Berita">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path>
+                                                </svg>
+                                            </a>
+                                            
+                                            <!-- Edit Button -->
+                                            <a href="{{ route('berita.edit', $post->id) }}"
+                                                class="text-yellow-600 hover:text-yellow-900 p-1 rounded-md hover:bg-yellow-100 transition duration-150"
+                                                title="Edit Berita">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                </svg>
+                                            </a>
+                                            
+                                            <!-- Toggle Status Button -->
+                                            <form action="{{ route('berita.toggle-status', $post->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit"
+                                                    class="p-1 rounded-md transition duration-150 {{ $post->is_active ? 'text-red-600 hover:text-red-900 hover:bg-red-100' : 'text-green-600 hover:text-green-900 hover:bg-green-100' }}"
+                                                    title="{{ $post->is_active ? 'Nonaktifkan' : 'Aktifkan' }}">
+                                                    @if($post->is_active)
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                    @else
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                        </svg>
+                                                    @endif
+                                                </button>
+                                            </form>
+                                            
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('berita.destroy', $post->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="text-red-600 hover:text-red-900 p-1 rounded-md hover:bg-red-100 transition duration-150"
+                                                    title="Hapus Berita"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
+                                    <td colspan="8" class="px-6 py-4 text-center text-sm text-gray-500">
                                         Tidak ada data berita
                                     </td>
                                 </tr>
@@ -184,4 +230,19 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        // Script untuk dropdown filter
+        document.getElementById('filterDropdownButton').addEventListener('click', function() {
+            document.getElementById('filterDropdown').classList.toggle('hidden');
+        });
+        
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!document.getElementById('filterDropdownButton').contains(e.target) && 
+                !document.getElementById('filterDropdown').contains(e.target)) {
+                document.getElementById('filterDropdown').classList.add('hidden');
+            }
+        });
+    </script>
 </x-app-layout>
