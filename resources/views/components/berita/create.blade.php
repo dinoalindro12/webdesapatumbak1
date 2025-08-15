@@ -21,12 +21,12 @@
                     
                     <!-- Tanggal Berita (Auto-fill) -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Tanggal Berita</label>
-                        <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 sm:text-sm" 
-                               type="text" 
-                               value="{{ now()->format('d F Y') }}" 
-                               readonly>
-                        <input type="hidden" name="date" value="{{ now()->toDateString() }}">
+                        <label for="date" class="block text-sm font-medium text-gray-700">Tanggal Berita</label>
+                        <input type="date" name="date" id="date" value="{{ old('date', now()->toDateString()) }}" required
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                        @error('date')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <!-- Penulis Berita (Auto-fill) -->
@@ -51,8 +51,16 @@
                     <!-- Gambar Berita -->
                     <div>
                         <label for="image" class="block text-sm font-medium text-gray-700">Gambar Berita (Opsional)</label>
-                        <input type="file" name="image" id="image" accept="image/*"
-                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                        <div class="mt-1 flex items-center">
+                            <input type="file" name="image" id="image" accept="image/*" 
+                                   class="block w-full text-sm text-gray-500
+                                          file:mr-4 file:py-2 file:px-4
+                                          file:rounded-md file:border-0
+                                          file:text-sm file:font-semibold
+                                          file:bg-gray-50 file:text-gray-700
+                                          hover:file:bg-gray-100">
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">Format: JPEG, PNG, JPG, GIF (Maksimal 2MB)</p>
                         @error('image')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -61,8 +69,9 @@
                     <!-- Kategori Berita -->
                     <div>
                         <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
-                        <select name="kategori" id="kategori" 
+                        <select name="kategori" id="kategori" required
                                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            <option value="">Pilih Kategori</option>
                             <option value="umum" {{ old('kategori') == 'umum' ? 'selected' : '' }}>Umum</option>
                             <option value="pendidikan" {{ old('kategori') == 'pendidikan' ? 'selected' : '' }}>Pendidikan</option>
                             <option value="kesehatan" {{ old('kategori') == 'kesehatan' ? 'selected' : '' }}>Kesehatan</option>
@@ -76,7 +85,7 @@
                 </div>
                 
                 <div class="mt-8 flex justify-end space-x-3">
-                    <a href="{{ url()->previous() }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <a href="{{ route('berita.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         Batal
                     </a>
                     <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">

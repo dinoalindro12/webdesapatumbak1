@@ -43,10 +43,10 @@
                                 <x-dropdown-link :href="route('berita.index')">
                                     {{ __('Daftar Berita') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('berita.create')">
+                                <x-dropdown-link :href="route('agenda.index')">
                                     {{ __('Daftar Agenda') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link href="#">
+                                <x-dropdown-link :href="route('pengumuman.index')">
                                     {{ __('Detail Pengumuman') }}
                                 </x-dropdown-link>
                             </div>
@@ -300,10 +300,10 @@
                     <x-responsive-nav-link :href="route('berita.index')" :active="request()->routeIs('berita.index')" class="pl-4">
                         {{ __('Daftar Berita') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('berita.create')" :active="request()->routeIs('berita.create')" class="pl-4">
+                    <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.create')" class="pl-4">
                         {{ __('Daftar Agenda') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link href="#" class="pl-4">
+                    <x-responsive-nav-link :href="route('pengumuman.index')" :active="request()->routeIs('pengumuman.create')" class="pl-4">
                         {{ __('Daftar Pengumuman') }}
                     </x-responsive-nav-link>
                 </div>

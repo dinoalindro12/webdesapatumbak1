@@ -12,7 +12,7 @@ class GaleriController extends Controller
     public function index()
     {
         $galeri = Galeri::latest()->paginate(12);
-        return view('components.galeri.show', compact('galeri'));
+        return view('components.galeri.index', compact('galeri'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class GaleriController extends Controller
             'link_video' => 'nullable|string|max:255',
             'keterangan_video' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'keterangan_gambar' => 'required|string',
+            'keterangan_gambar' => 'nullable|required|string',
             'tanggal' => 'required|date',
         ]);
         
@@ -34,8 +34,8 @@ class GaleriController extends Controller
             $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
         }
 
-        Galeri::create($validated);
-        return redirect()->route('galeri.show')->with('success', 'Konten galeri berhasil ditambahkan!');
+    $galeri = Galeri::create($validated);
+    return redirect()->route('galeri.index', $galeri->id)->with('success', 'Konten galeri berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -44,20 +44,20 @@ class GaleriController extends Controller
         return view('components.galeri.edit', compact('galeri'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Galeri $galeri)
     {
-        $galeri = Galeri::findOrFail($id);
-        
-        $request->validate([
-            
+
+
+        $validated = $request->validate([
+
             'link_video' => 'nullable|string|max:255',
             'keterangan_video' => 'nullable|string|max:255',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'keterangan_gambar' => 'required|string|max:255',
+            'keterangan_gambar' => 'nullable|required|string|max:255',
             'tanggal' => 'required|date',
         ]);
 
-        $data = $request->all();
+       
         
         if ($request->hasFile('gambar')) {
             // Delete old image if exists
@@ -89,8 +89,7 @@ class GaleriController extends Controller
 
     public function show($id)
     {
-        $galeri = Galeri::findOrFail($id);
-        return view('components.galeri.show', compact('galeri'));
+        
     }
 
     // For public users

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_proyek');
+            $table->year('waktu_mulai');
+            $table->bigInteger('besar_anggaran');
+            $table->string('ukuran_proyek')->nullable();
+            $table->enum('status', ['Selesai', 'Berjalan', 'Tertunda']);
             $table->timestamps();
         });
     }

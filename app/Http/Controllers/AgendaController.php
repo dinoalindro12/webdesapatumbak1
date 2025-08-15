@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Agenda;
 use Illuminate\Http\Request;
+use Illuminate\Models\Pendidikan;
+
 
 class AgendaController extends Controller
 {
@@ -11,6 +13,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
+        $agenda = Agenda::latest()->paginate(10);
         return view('components.agenda.index', compact('agenda'));
     }
 
@@ -29,13 +32,13 @@ class AgendaController extends Controller
     {
         $validated = $request->validate([
             'nama_proyek' => 'required|string|max:255',
-            'waktu mulai' => 'required|integer|min:1900|max:' . date('Y'),
+            'waktu_mulai' => 'required|integer|min:1900|max:' . date('Y'),
             'besar_anggaran' => 'required|integer',
             'ukuran_proyek' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
         ]);
         Agenda::create($validated);
-        return redirect()->route('agenda.index')->with('success', 'Data pendidikan berhasil ditambahkan.');
+        return redirect()->route('agenda.index')->with('success', 'Data agenda berhasil ditambahkan.');
     }
 
     /**
@@ -51,7 +54,7 @@ class AgendaController extends Controller
      */
     public function edit(string $id)
     {
-        $agenda = Pendidikan::findOrFail($id);
+        $agenda = Agenda::findOrFail($id);
         return view('components.agenda.edit', compact('agenda'));
     }
 
@@ -62,13 +65,14 @@ class AgendaController extends Controller
     {
         $validated = $request->validate([
             'nama_proyek' => 'required|string|max:255',
-            'waktu mulai' => 'required|integer|min:1900|max:' . date('Y'),
+            'waktu_mulai' => 'required|integer|min:1900|max:' . date('Y'),
             'besar_anggaran' => 'required|integer',
             'ukuran_proyek' => 'nullable|string|max:255',
             'status' => 'nullable|string|max:255',
         ]);
-        Agenda::update($validated);
-        return redirect()->route('agenda.index')->with('success', 'Pengaduan berhasil diajukan!');
+        $agenda = Agenda::findOrFail($id);
+        $agenda->update($validated);
+        return redirect()->route('agenda.index')->with('success', 'Agenda berhasil diperbarui!');
 
     }
 
@@ -77,9 +81,12 @@ class AgendaController extends Controller
      */
     public function destroy(string $id)
     {
+        $agenda = Agenda::findOrFail($id);
+        $agenda->delete();
+        return redirect()->route('agenda.index')->with('success', 'Agenda berhasil dihapus!');
         
     }
-    public function agendauser()
+    public function userView()
     {
         $agenda = Agenda::paginate(10);
         return view('berita-kegiatan.agenda-kegiatan', compact('agenda'));

@@ -1,15 +1,15 @@
-<x-app-layout title="Admin - Agenda Proyek">
+<x-app-layout title="Admin - Pengumuman">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
             <div>
-                <h1 class="text-2xl font-serif font-light text-gray-800">Kelola Agenda Proyek</h1>
-                <p class="text-sm text-gray-500 mt-1">Manajemen data agenda proyek desa Sukamaju</p>
+                <h1 class="text-2xl font-serif font-light text-gray-800">Kelola Pengumuman</h1>
+                <p class="text-sm text-gray-500 mt-1">Manajemen data pengumuman desa Sukamaju</p>
             </div>
-            <a href="{{ route('agenda.create') }}" class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <a href="{{ route('pengumuman.create') }}" class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
-                Tambah Proyek
+                Tambah Pengumuman
             </a>
         </div>
 
@@ -42,19 +42,13 @@
                                             No
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Nama Proyek
+                                            Judul
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Waktu Mulai
+                                            Isi
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Besar Anggaran
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Ukuran Proyek
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Status
+                                            Tanggal
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Aksi
@@ -62,41 +56,28 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach($agenda as $i => $item)
+                                    @foreach($pengumuman as $i => $p)
                                     <tr class="hover:bg-gray-50 transition-colors duration-150">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ $agenda->firstItem() + $i }}
+                                            {{ $pengumuman->firstItem() + $i }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->nama_proyek }}
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">{{ $p->judul }}</div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->waktu_mulai }}
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-700 line-clamp-2">{{ Str::limit(strip_tags($p->isi), 80) }}</div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            Rp{{ number_format($item->besar_anggaran, 0, ',', '.') }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->ukuran_proyek ?? '-' }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-medium rounded-full
-                                                @if($item->status == 'Selesai') bg-green-100 text-green-800
-                                                @elseif($item->status == 'Berjalan') bg-blue-100 text-blue-800
-                                                @elseif($item->status == 'Tertunda') bg-yellow-100 text-yellow-800
-                                                @else bg-gray-100 text-gray-800
-                                                @endif">
-                                                {{ $item->status ?? '-' }}
-                                            </span>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ \Carbon\Carbon::parse($p->tanggal)->format('d M Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex justify-end space-x-2">
-                                                <a href="{{ route('agenda.edit', $item->id) }}" class="text-gray-600 hover:text-gray-900" title="Edit">
+                                                <a href="{{ route('pengumuman.edit', $p->id) }}" class="text-gray-600 hover:text-gray-900" title="Edit">
                                                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('agenda.destroy', $item->id) }}" method="POST" class="inline">
+                                                <form action="{{ route('pengumuman.destroy', $p->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
@@ -115,9 +96,9 @@
                     </div>
                 </div>
             </div>
-            @if($agenda->hasPages())
+            @if($pengumuman->hasPages())
             <div class="px-6 py-4 border-t border-gray-200">
-                {{ $agenda->links() }}
+                {{ $pengumuman->links() }}
             </div>
             @endif
         </div>
