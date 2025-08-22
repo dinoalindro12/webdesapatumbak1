@@ -15,7 +15,7 @@
             <div class="text-center">
                 <h1 class="text-4xl font-serif font-light text-gray-800 sm:text-5xl md:text-6xl">
                     <span class="block">Perangkat Desa</span>
-                    <span class="block text-gray-600 mt-2">Sukamaju</span>
+                    <span class="block text-gray-600 mt-2">Patumbak 1</span>
                 </h1>
                 <div class="mt-8 max-w-2xl mx-auto">
                     <p class="text-lg text-gray-600">Kenali para pelayan masyarakat yang bertugas dengan penuh dedikasi</p>
@@ -78,7 +78,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-serif font-light text-gray-800">Struktur Organisasi</h2>
                 <div class="mt-4 w-20 h-px bg-gray-300 mx-auto"></div>
-                <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Struktur pemerintahan Desa Sukamaju yang bekerja untuk melayani masyarakat</p>
+                <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Struktur pemerintahan Desa Patumbak 1\ yang bekerja untuk melayani masyarakat</p>
             </div>
 
             <div class="org-tree">

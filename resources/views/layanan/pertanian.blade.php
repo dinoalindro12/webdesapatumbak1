@@ -8,7 +8,7 @@
                         <div class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                             <div class="sm:text-center lg:text-left">
                                 <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                                    <span class="block">Layanan Unggulan</span>
+                                    <span class="blocbk">Layanan Unggulan</span>
                                     <span class="block text-gray-300">Desa Patumbak 1</span>
                                 </h1>
                                 <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">

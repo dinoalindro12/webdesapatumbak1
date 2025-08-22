@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('jabatan');
             $table->string('foto')->nullable();
             $table->string('kontak')->nullable();
-            $table->string('email')->nullable();
             $table->string('masa_jabatan')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

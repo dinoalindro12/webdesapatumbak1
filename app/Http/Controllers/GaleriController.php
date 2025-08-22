@@ -4,67 +4,99 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeri;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
+    // For admin
     public function index()
     {
-        // Logika untuk menampilkan galeri
-        return view('galeri.index');
+        $galeri = Galeri::latest()->paginate(12);
+        return view('components.galeri.show', compact('galeri'));
     }
+
     public function create()
-    {
-        // Logika untuk menampilkan form tambah galeri
-        return view('galeri.create');
+    {    
+        return view('components.galeri.create');
     }       
+
     public function store(Request $request)
     {
-        // Logika untuk menyimpan galeri
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+        $validated = $request->validate([ // Added missing field
+            'link_video' => 'nullable|string|max:255',
+            'keterangan_video' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'slug' => 'required|string|unique:galeri,slug',
-            'kategori' => 'required|string|max:255',
+            'keterangan_gambar' => 'required|string',
+            'tanggal' => 'required|date',
         ]);
-        // Validasi dan simpan data ke database
+        
+        if ($request->hasFile('gambar')) {
+            $validated['gambar'] = $request->file('gambar')->store('galeri', 'public');
+        }
 
-        // Redirect atau tampilkan pesan sukses
+        Galeri::create($validated);
+        return redirect()->route('galeri.show')->with('success', 'Konten galeri berhasil ditambahkan!');
     }
+
     public function edit($id)
     {
-        // Logika untuk menampilkan form edit galeri
         $galeri = Galeri::findOrFail($id);
-        return view('galeri.edit', compact('galeri'));
+        return view('components.galeri.edit', compact('galeri'));
     }
+
     public function update(Request $request, $id)
     {
-        // Logika untuk memperbarui galeri
         $galeri = Galeri::findOrFail($id);
+        
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            
+            'link_video' => 'nullable|string|max:255',
+            'keterangan_video' => 'nullable|string|max:255',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'slug' => 'required|string|unique:galeri,slug,' . $galeri->id,
-            'kategori' => 'required|string|max:255',
+            'keterangan_gambar' => 'required|string|max:255',
+            'tanggal' => 'required|date',
         ]);
-        // Validasi dan simpan data ke database
 
-        // Redirect atau tampilkan pesan sukses
+        $data = $request->all();
+        
+        if ($request->hasFile('gambar')) {
+            // Delete old image if exists
+            if ($galeri->gambar) {
+                Storage::disk('public')->delete($galeri->gambar);
+            }
+            $data['gambar'] = $request->file('gambar')->store('galeri', 'public');
+        }
+
+        // Get the updated model instance
+        $galeri->fill($data)->save();
+        
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui!');
     }
+
     public function destroy($id)
     {
-        // Logika untuk menghapus galeri
         $galeri = Galeri::findOrFail($id);
+        
+        // Delete image file if exists
+        if ($galeri->gambar) {
+            Storage::disk('public')->delete($galeri->gambar);
+        }
+        
         $galeri->delete();
 
-        // Redirect atau tampilkan pesan sukses
-    }
-    public function show($slug)
-    {
-        // Logika untuk menampilkan detail galeri berdasarkan slug
-        $galeri = Galeri::where('slug', $slug)->firstOrFail();
-        return view('galeri.show', compact('galeri'));
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus!');
     }
 
+    public function show($id)
+    {
+        $galeri = Galeri::findOrFail($id);
+        return view('components.galeri.show', compact('galeri'));
+    }
+
+    // For public users
+    public function indexUser()
+    {
+        $galeri = Galeri::latest()->where('is_public', true)->paginate(12);
+        return view('galeri.index', compact('galeri'));
+    }
 }

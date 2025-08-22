@@ -15,10 +15,10 @@
             <div class="text-center">
                 <h1 class="text-4xl font-serif font-light text-gray-800 sm:text-5xl md:text-6xl">
                     <span class="block">Sejarah Kepemimpinan</span>
-                    <span class="block text-gray-600 mt-2">Desa Sukamaju</span>
+                    <span class="block text-gray-600 mt-2">Desa Patumbak 1</span>
                 </h1>
                 <div class="mt-8 max-w-2xl mx-auto">
-                    <p class="text-lg text-gray-600">Mengenal para pemimpin yang telah membangun Desa Sukamaju</p>
+                    <p class="text-lg text-gray-600">Mengenal para pemimpin yang telah membangun Desa Patumbak 1</p>
                     <div class="mt-6 w-24 h-px bg-gray-300 mx-auto"></div>
                 </div>
             </div>
@@ -26,254 +26,298 @@
     </div>
 
     <!-- Timeline Section -->
-    <div class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flow-root">
-                <ul class="-mb-8">
-                    <!-- Kepala Desa 1 -->
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-600 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">1</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Irwansyah Lubis, S.H</h3>
-                                                <p class="text-gray-600">Kepala Desa (2016-Sekarang)</p>
+    <!-- Timeline Section -->
+<div class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flow-root">
+            <ul class="-mb-8">
+                <!-- Kepala Desa 1 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-600 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">1</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl font-bold text-blue-600">
+                                                IL
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Memimpin berbagai program pembangunan infrastruktur desa dan peningkatan ekonomi masyarakat melalui pengembangan UMKM.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Irwansyah Lubis, S.H</h3>
+                                            <p class="text-gray-600">Kepala Desa (2016-Sekarang)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="2021" class="text-sm text-gray-500 whitespace-nowrap">2016 - Sekarang</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Memimpin berbagai program pembangunan infrastruktur desa dan peningkatan ekonomi masyarakat melalui pengembangan UMKM.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="2021" class="text-sm text-gray-500 whitespace-nowrap">2016 - Sekarang</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <!-- Kepala Desa 2 -->
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-500 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">2</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Muhamad Yusuf</h3>
-                                                <p class="text-gray-600">Kepala Desa (2009-2016)</p>
+                <!-- Kepala Desa 2 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-500 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">2</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-purple-100 flex items-center justify-center text-2xl font-bold text-purple-600">
+                                                MY
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Meluncurkan program Desa Digital dan meningkatkan akses pendidikan melalui pembangunan perpustakaan desa.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Muhamad Yusuf</h3>
+                                            <p class="text-gray-600">Kepala Desa (2009-2016)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="2015-2021" class="text-sm text-gray-500 whitespace-nowrap">2009 - 2015</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Meluncurkan program Desa Digital dan meningkatkan akses pendidikan melalui pembangunan perpustakaan desa.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="2015-2021" class="text-sm text-gray-500 whitespace-nowrap">2009 - 2015</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <!-- Kepala Desa 3 -->
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">3</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Zulkipli Suarisno</h3>
-                                                <p class="text-gray-600">Kepala Desa (2001-2008)</p>
+                <!-- Kepala Desa 3 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">3</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center text-2xl font-bold text-green-600">
+                                                ZS
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Fokus pada pemberdayaan perempuan dan pengembangan sektor pertanian melalui program intensifikasi pertanian.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Zulkipli Suarisno</h3>
+                                            <p class="text-gray-600">Kepala Desa (2001-2008)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="2009-2015" class="text-sm text-gray-500 whitespace-nowrap">2001 - 2008</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Fokus pada pemberdayaan perempuan dan pengembangan sektor pertanian melalui program intensifikasi pertanian.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="2009-2015" class="text-sm text-gray-500 whitespace-nowrap">2001 - 2008</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <!-- Kepala Desa 4 -->
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">4</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Supangat Riyadi P</h3>
-                                                <p class="text-gray-600">Kepala Desa (1984-2000)</p>
+                <!-- Kepala Desa 4 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <span class="absolute top-8 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">4</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center text-2xl font-bold text-amber-600">
+                                                SR
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Melakukan modernisasi administrasi desa dan membangun infrastruktur dasar seperti jalan dan saluran air.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Supangat Riyadi P</h3>
+                                            <p class="text-gray-600">Kepala Desa (1984-2000)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="2003-2009" class="text-sm text-gray-500 whitespace-nowrap">1984 - 2000</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Melakukan modernisasi administrasi desa dan membangun infrastruktur dasar seperti jalan dan saluran air.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="2003-2009" class="text-sm text-gray-500 whitespace-nowrap">1984 - 2000</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <!-- Kepala Desa 5 -->
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">5</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Abdurrahim</h3>
-                                                <p class="text-gray-600">Kepala Desa (1976-1984)</p>
+                <!-- Kepala Desa 5 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">5</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-red-100 flex items-center justify-center text-2xl font-bold text-red-600">
+                                                AR
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Sukamaju.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Abdurrahim</h3>
+                                            <p class="text-gray-600">Kepala Desa (1976-1984)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1976-1984</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Patumbak 1.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1976-1984</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">5</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Ibrahim</h3>
-                                                <p class="text-gray-600">Kepala Desa (1969-1975)</p>
+                <!-- Kepala Desa 6 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">6</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600">
+                                                IB
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Sukamaju.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Ibrahim</h3>
+                                            <p class="text-gray-600">Kepala Desa (1969-1975)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1969-1975</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Patumbak 1.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1969-1975</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">6</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Usman Simarmata</h3>
-                                                <p class="text-gray-600">Kepala Desa (1964-1968)</p>
+                <!-- Kepala Desa 7 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">7</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-cyan-100 flex items-center justify-center text-2xl font-bold text-cyan-600">
+                                                US
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Sukamaju.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Usman Simarmata</h3>
+                                            <p class="text-gray-600">Kepala Desa (1964-1968)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1964-1968</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Patumbak 1.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1964-1968</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                    <li class="transform transition-all duration-500 hover:-translate-x-1">
-                        <div class="relative pb-8">
-                            <div class="relative flex space-x-4">
-                                <div>
-                                    <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
-                                        <span class="text-white text-sm font-medium">7</span>
-                                    </span>
-                                </div>
-                                <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 rounded-full object-cover mr-4" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Kepala Desa">
-                                            <div>
-                                                <h3 class="text-xl font-light text-gray-800">Bapak Anwar Rangkuti</h3>
-                                                <p class="text-gray-600">Kepala Desa (1950-1963)</p>
+                <!-- Kepala Desa 8 -->
+                <li class="transform transition-all duration-500 hover:-translate-x-1">
+                    <div class="relative pb-8">
+                        <div class="relative flex space-x-4">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white">
+                                    <span class="text-white text-sm font-medium">8</span>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex flex-col md:flex-row justify-between gap-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div class="relative mr-4">
+                                            <div class="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center text-2xl font-bold text-emerald-600">
+                                                AR
                                             </div>
+                                            <div class="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white"></div>
                                         </div>
-                                        <div class="mt-4 text-gray-600">
-                                            <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Sukamaju.</p>
+                                        <div>
+                                            <h3 class="text-xl font-light text-gray-800">Bapak Anwar Rangkuti</h3>
+                                            <p class="text-gray-600">Kepala Desa (1950-1963)</p>
                                         </div>
                                     </div>
-                                    <div class="md:text-right">
-                                        <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1950-1963</time>
+                                    <div class="mt-4 text-gray-600">
+                                        <p>Memulai program pembangunan masjid desa dan mendirikan sekolah dasar pertama di Desa Patumbak 1.</p>
                                     </div>
+                                </div>
+                                <div class="md:text-right">
+                                    <time datetime="1997-2003" class="text-sm text-gray-500 whitespace-nowrap">1950-1963</time>
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 
     <!-- Achievements Section -->
     <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
@@ -281,7 +325,7 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-serif font-light text-gray-800">Pencapaian Penting</h2>
                 <div class="mt-4 w-20 h-px bg-gray-300 mx-auto"></div>
-                <p class="mt-4 text-gray-500">Momen bersejarah dalam perkembangan Desa Sukamaju</p>
+                <p class="mt-4 text-gray-500">Momen bersejarah dalam perkembangan Desa Patumbak 1</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
@@ -295,7 +339,7 @@
                         <h3 class="text-xl font-light text-gray-800">2019</h3>
                     </div>
                     <div class="text-gray-600">
-                        <p>Desa Sukamaju meraih penghargaan sebagai Desa Terinovatif tingkat kabupaten berkat program Desa Digital.</p>
+                        <p>Desa Patumbak 1 meraih penghargaan sebagai Desa Terinovatif tingkat kabupaten berkat program Desa Digital.</p>
                     </div>
                 </div>
 
@@ -337,7 +381,7 @@
                         <h3 class="text-xl font-light text-gray-800">1999</h3>
                     </div>
                     <div class="text-gray-600">
-                        <p>Pembangunan SD Negeri Sukamaju yang menjadi lembaga pendidikan pertama di desa ini.</p>
+                        <p>Pembangunan SD Negeri Patumbak 1 yang menjadi lembaga pendidikan pertama di desa ini.</p>
                     </div>
                 </div>
             </div>
@@ -345,7 +389,7 @@
     </div>
 
     <!-- Current Structure Section -->
-    <div class="bg-white py-16">
+    <!-- <div class="bg-white py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-serif font-light text-gray-800">Struktur Kepemimpinan Saat Ini</h2>
@@ -355,7 +399,7 @@
 
             <div class="org-chart-container">
                 <div class="org-chart mx-auto">
-                    <!-- Level 1 - Kepala Desa -->
+                    // Level 1 - Kepala Desa
                     <div class="org-level-1 transform transition-all duration-700 ease-out opacity-0 translate-y-6 animate-fade-in-up">
                         <div class="org-node">
                             <div class="org-node-header bg-gradient-to-r from-gray-600 to-gray-500 text-white">Kepala Desa</div>
@@ -366,7 +410,7 @@
                         </div>
                     </div>
 
-                    <!-- Level 2 - Sekretaris dan Kasi -->
+                    // Level 2 - Sekretaris dan Kasi
                     <div class="org-level-2 transform transition-all duration-700 ease-out opacity-0 translate-y-6 animate-fade-in-up" style="animation-delay: 200ms">
                         <div class="org-node">
                             <div class="org-node-header bg-gray-500 text-white">Sekretaris Desa</div>
@@ -403,7 +447,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    
 
     <style>
         /* Timeline Styles */

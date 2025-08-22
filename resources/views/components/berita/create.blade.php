@@ -1,79 +1,89 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Berita') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <!-- Form untuk membuat berita -->
-                    <form method="POST" action="{{ route('berita.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <!-- Judul Berita -->
-                        <div class="mb-4">
-                            <x-input-label for="title" :value="__('Judul Berita')" />
-                            <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                        </div>
-                        <!-- Tanggal Berita (Auto-fill) -->
-                        <div class="mb-4">
-                            <x-input-label :value="__('Tanggal Berita')" />
-                            <x-text-input class="block mt-1 w-full bg-gray-100 dark:bg-gray-700" 
-                                        type="text" 
-                                        :value="now()->format('d F Y')" 
-                                        readonly />
-                            <input type="hidden" name="date" value="{{ now()->toDateString() }}">
-                        </div>
-
-                        <!-- Penulis Berita (Auto-fill dari admin yang login) -->
-                        <div class="mb-4">
-                            <x-input-label :value="__('Penulis Berita')" />
-                            <x-text-input class="block mt-1 w-full bg-gray-100 dark:bg-gray-700" 
-                                        type="text" 
-                                        :value="Auth::user()->name" 
-                                        readonly />
-                            <input type="hidden" name="author_id" value="{{ Auth::id() }}">
-                        </div>
-
-                        <!-- Konten Berita -->
-                        <div class="mb-4">
-                            <x-input-label for="content" :value="__('Isi Berita')" />
-                            <textarea id="content" name="content" rows="10" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>{{ old('content') }}</textarea>
-                            <x-input-error :messages="$errors->get('content')" class="mt-2" />
-                        </div>
-
-                        <!-- Gambar Berita -->
-                        <div class="mb-4">
-                            <x-input-label for="image" :value="__('Gambar Berita (opsional)')" />
-                            <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" accept="image/*" />
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-                        </div>
-
-                        <!-- Kategori Berita -->
-                        <div class="mb-4">
-                            <x-input-label for="category" :value="__('Kategori')" />
-                            <select id="category" name="category" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                <option value="umum">Umum</option>
-                                <option value="pendidikan">Pendidikan</option>
-                                <option value="kesehatan">Kesehatan</option>
-                                <option value="olahraga">Olahraga</option>
-                                <option value="teknologi">Teknologi</option>
-                            </select>
-                            <x-input-error :messages="$errors->get('category')" class="mt-2" />
-                        </div>
-
-                        <!-- Tombol Submit -->
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button>
-                                {{ __('Publikasikan Berita') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-                </div>
+<x-app-layout title="Tambah Berita">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-2xl font-serif font-light text-gray-800">Tambah Berita Baru</h2>
             </div>
+            
+            <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data" class="p-6">
+                @csrf
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Judul Berita -->
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Judul Berita</label>
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" required
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                        @error('title')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <!-- Tanggal Berita (Auto-fill) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Tanggal Berita</label>
+                        <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 sm:text-sm" 
+                               type="text" 
+                               value="{{ now()->format('d F Y') }}" 
+                               readonly>
+                        <input type="hidden" name="date" value="{{ now()->toDateString() }}">
+                    </div>
+                    
+                    <!-- Penulis Berita (Auto-fill) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Penulis Berita</label>
+                        <input class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 sm:text-sm" 
+                               type="text" 
+                               value="{{ Auth::user()->name }}" 
+                               readonly>
+                    </div>
+                    
+                    <!-- Konten Berita -->
+                    <div>
+                        <label for="body" class="block text-sm font-medium text-gray-700">Isi Berita</label>
+                        <textarea id="body" name="body" rows="10" required
+                                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">{{ old('body') }}</textarea>
+                        @error('body')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <!-- Gambar Berita -->
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700">Gambar Berita (Opsional)</label>
+                        <input type="file" name="image" id="image" accept="image/*"
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                        @error('image')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <!-- Kategori Berita -->
+                    <div>
+                        <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
+                        <select name="kategori" id="kategori" 
+                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            <option value="umum" {{ old('kategori') == 'umum' ? 'selected' : '' }}>Umum</option>
+                            <option value="pendidikan" {{ old('kategori') == 'pendidikan' ? 'selected' : '' }}>Pendidikan</option>
+                            <option value="kesehatan" {{ old('kategori') == 'kesehatan' ? 'selected' : '' }}>Kesehatan</option>
+                            <option value="olahraga" {{ old('kategori') == 'olahraga' ? 'selected' : '' }}>Olahraga</option>
+                            <option value="teknologi" {{ old('kategori') == 'teknologi' ? 'selected' : '' }}>Teknologi</option>
+                        </select>
+                        @error('kategori')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-end space-x-3">
+                    <a href="{{ url()->previous() }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Batal
+                    </a>
+                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Publikasikan Berita
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </x-app-layout>

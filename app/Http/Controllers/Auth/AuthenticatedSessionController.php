@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $redirectTo = $request->redirect
             ? route($request->redirect)
-            : ($user->role === 'admin' ? route('dashboard') : route('layanan.surat-menyurat'));
+            : ($user->role === 'admin' ? route('dashboard.index') : route('layanan.surat-menyurat'));
 
         return redirect()->to($redirectTo);
     }

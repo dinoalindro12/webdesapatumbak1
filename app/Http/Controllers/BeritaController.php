@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +31,8 @@ class BeritaController extends Controller
         $kategories = Berita::select('kategori')->distinct()->pluck('kategori');
         
         $posts = $query->paginate(10)->withQueryString();
-        
-        return view('dashboard', [
+
+        return view('components.berita.index', [
             'posts' => $posts,
             'kategories' => $kategories,
         ]);
@@ -52,6 +53,13 @@ class BeritaController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Pastikan author_id tidak null
+        $authorId = Auth::id();
+        if (!$authorId) {
+            // fallback untuk development/testing, ganti dengan id user default jika perlu
+            $authorId = 1;
+        }
+
         // Generate unique slug
         $slug = Str::slug($request->title);
         $uniqueSlug = $slug;
@@ -60,13 +68,20 @@ class BeritaController extends Controller
             $uniqueSlug = $slug . '-' . $counter++;
         }
 
+        // Pastikan author_id tidak null
+        $authorId = Auth::id() ?? 1; // Fallback ke ID 1 jika tidak ada user yang login
+
+        // Cari atau buat kategori yang sesuai
+        $category = Category::firstOrCreate(['name' => $validated['kategori']]);
+
         $berita = Berita::create([
             'title' => $validated['title'],
             'slug' => $uniqueSlug,
             'body' => $validated['body'],
-            'author_id' => Auth::id(),
+            'author_id' => $authorId,
             'date' => $validated['date'],
             'kategori' => $validated['kategori'],
+            'category_id' => $category->id,
             'image' => $request->hasFile('image') 
                 ? $request->file('image')->store('berita-images', 'public') 
                 : null
@@ -75,16 +90,21 @@ class BeritaController extends Controller
         return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan');
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $post = Berita::findOrFail($id);
-        return view('dashboard', compact('post'));
+        $post = Berita::where('slug', $slug)->with('author')->firstOrFail();
+        $related = Berita::where('kategori', $post->kategori)
+            ->where('id', '!=', $post->id)
+            ->orderByDesc('date')
+            ->take(4)
+            ->get();
+        return view('berita-kegiatan.berita-full', compact('post', 'related'));
     }
 
     public function edit($id)
     {
-        $post = Berita::findOrFail($id);
-        return view('berita-kegiatan.edit', compact('post'));
+        $berita = Berita::findOrFail($id);
+        return view('components.berita.edit', compact('berita'));
     }
 
     public function update(Request $request, $id)
@@ -120,7 +140,7 @@ class BeritaController extends Controller
                 : $berita->image
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Berita berhasil diperbarui');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -128,7 +148,7 @@ class BeritaController extends Controller
         $berita = Berita::findOrFail($id);
         $berita->delete();
         
-        return redirect()->route('dashboard')->with('success', 'Berita berhasil dihapus');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus');
     }
     public function showindex(Request $request)
     {
@@ -142,7 +162,7 @@ class BeritaController extends Controller
                 ->orWhere('body', 'like', '%'.$request->q.'%');
             });
         }
-        $beritas = $query->orderByDesc('date')->take(6)->get();
+        $beritas = $query->orderByDesc('date')->paginate(6)->withQueryString();
         return view('berita-kegiatan.berita-terkini', [
             'posts' => $beritas,
             'selectedCategory' => $request->category,

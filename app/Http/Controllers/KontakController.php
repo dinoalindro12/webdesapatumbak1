@@ -10,7 +10,7 @@ class KontakController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index1()
     {
         $kontaks = Kontak::paginate(10); // Paginate the contacts for better performance
         return view('components.kontak.index', compact('kontaks'));

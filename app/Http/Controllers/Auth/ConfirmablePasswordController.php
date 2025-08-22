@@ -47,7 +47,7 @@ class ConfirmablePasswordController extends Controller
     protected function redirectBasedOnRole($user): RedirectResponse
     {
         if ($user->role === 'admin') {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         return redirect()->route('layanan.surat-menyurat');

@@ -8,37 +8,53 @@ use Illuminate\Support\Facades\Validator;
 
 class BerandaController extends Controller
 {
+    public function berandauser()
+    {
+        $beranda = Beranda::orderBy('id', 'asc')->paginate(10);
+        return view('welcome', compact('beranda'));
+    }
+
     /**
      * Display the main dashboard view.
      */
     public function index()
     {
-        $beranda = Beranda::orderBy('id','asc')->paginate(10);
+        $beranda = Beranda::orderBy('id', 'asc')->paginate(10);
         return view('welcome', compact('beranda'));
-    } 
-    public function create($request)
+    }
+
+    public function admin()
     {
-        $beranda = $request->validate([
-            'total_penduduk' => 'required|string|max:50',
+        $dashboard = Beranda::orderBy('id', 'asc')->paginate(10);
+        return view('components.dashboard.index', compact('dashboard'));
+    }
+
+    public function create(Request $request)
+    {
+        return view('components.dashboard.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'total_penduduk' => 'required|numeric|min:0',
             'anggaran_desa' => 'required|numeric|min:0',
-            'jumlah_program' => 'required|string',
+            'jumlah_program' => 'required|numeric|min:0',
             'aktivitas_terkini' => 'required|string|max:255',
+            'jumlah_umkm' => 'required|numeric|min:0',
             'prestasi' => 'required|string|max:255',
             'keberhasilan' => 'required|string|max:255',
             'anggaran_terpakai' => 'required|numeric|min:0',
-
         ]);
-        // Prepare data for the view
-        $data = [
-            'beranda' => $beranda,
-            'greeting' => Beranda::getGreeting(),
-            'achievements' => $beranda->getAchievements(),
-            'activeServices' => $beranda->getActiveServices(),
-            'monthlyIndicators' => $beranda->getMonthlyIndicators(date('Y')),
-            'populationData' => $this->getPopulationChartData(),
-        ];
 
-        return view('components.berita.create', $data);
+        $beranda = Beranda::create($validated);
+        return redirect()->route('dashboard.index')->with('success', 'Data perangkat berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $beranda = Beranda::findOrFail($id);
+        return view('components.dashboard.edit', compact('beranda'));
     }
 
     /**
@@ -47,7 +63,7 @@ class BerandaController extends Controller
     public function update(Request $request, Beranda $beranda)
     {
         $validator = Validator::make($request->all(), [
-            'total_penduduk' => 'required|integer|min:0',
+            'total_penduduk' => 'required|numeric|min:0',
             'anggaran_desa' => 'required|numeric|min:0',
             'anggaran_terpakai' => 'required|numeric|min:0|lte:anggaran_desa',
             'jumlah_program' => 'required|integer|min:0',
@@ -73,6 +89,13 @@ class BerandaController extends Controller
 
         return redirect()->route('beranda')
             ->with('success', 'Data beranda berhasil diperbarui!');
+    }
+
+    public function destroy(Beranda $beranda, $id)
+    {
+        $beranda = Beranda::findOrFail($id);
+        $beranda->delete();
+        return redirect()->route('dashboard.index')->with('success', 'Data beranda berhasil dihapus!');
     }
 
     /**
@@ -110,5 +133,5 @@ class BerandaController extends Controller
     /**
      * Get monthly indicator data for a specific year.
      */
-    
+
 }

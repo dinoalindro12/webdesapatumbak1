@@ -15,8 +15,8 @@ class Berita extends Model
         'title', 
         'body', 
         'date', 
-        'image', 
-        'author', 
+        'image',
+        'author_id',
         'kategori',
         'category_id'
     ];

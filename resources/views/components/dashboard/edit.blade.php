@@ -1,301 +1,100 @@
-<x-layout title="Edit Data Desa">
-    <div class="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
-            <!-- Form Header -->
-            <div class="text-center mb-10">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Data Desa</h1>
-                <p class="text-lg text-gray-600">Perbarui data perkembangan Desa Patumbak 1</p>
-                <div class="w-20 h-1 bg-gray-300 mx-auto mt-4"></div>
+<x-app-layout title="Admin - Edit Data Beranda">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-serif font-light text-gray-800">Edit Data Beranda Desa</h1>
+                <p class="text-sm text-gray-500 mt-1">Manajemen Web desa Patumbak 1</p>
             </div>
+            <a href="{{ route('dashboard.index') }}" class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                Kembali
+            </a>
+        </div>
 
-            <!-- Form Container -->
-            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-                <!-- Form Navigation -->
-                <div class="bg-gray-800 px-6 py-4">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-medium text-white">Edit Data Desa</h2>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-600 text-gray-200">
-                            ID: {{ $data->id }}
-                        </span>
+        @if ($errors->any())
+        <div class="mb-6 rounded-md bg-red-50 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">
+                        Terdapat {{ $errors->count() }} kesalahan pada input Anda:
+                    </h3>
+                    <div class="mt-2 text-sm text-red-700">
+                        <ul class="list-disc pl-5 space-y-1">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-
-                <!-- Form Body -->
-                <form action="{{ route('data-desa.update', $data->id) }}" method="POST" class="p-6 sm:p-8">
-                    @csrf
-                    @method('PUT')
-
-                    <!-- Section 1: Data Kependudukan -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Data Kependudukan</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Total Penduduk -->
-                            <div>
-                                <label for="total_penduduk" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Total Penduduk
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <div class="relative rounded-md shadow-sm">
-                                    <input 
-                                        type="number" 
-                                        name="total_penduduk" 
-                                        id="total_penduduk" 
-                                        required
-                                        value="{{ old('total_penduduk', $data->total_penduduk) }}"
-                                        class="focus:ring-gray-500 focus:border-gray-500 block w-full pl-4 pr-12 py-3 sm:text-sm border-gray-300 rounded-md"
-                                        placeholder="Masukkan jumlah penduduk">
-                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                        <span class="text-gray-500 sm:text-sm">Jiwa</span>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-xs text-gray-500">Jumlah total penduduk terdaftar di desa</p>
-                                @error('total_penduduk')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <!-- Jumlah Penduduk -->
-                            <div>
-                                <label for="jumlah_penduduk" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Jumlah Kepala Keluarga
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <div class="relative rounded-md shadow-sm">
-                                    <input 
-                                        type="number" 
-                                        name="jumlah_penduduk" 
-                                        id="jumlah_penduduk" 
-                                        required
-                                        value="{{ old('jumlah_penduduk', $data->jumlah_penduduk) }}"
-                                        class="focus:ring-gray-500 focus:border-gray-500 block w-full pl-4 pr-12 py-3 sm:text-sm border-gray-300 rounded-md"
-                                        placeholder="Masukkan jumlah KK">
-                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                        <span class="text-gray-500 sm:text-sm">KK</span>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-xs text-gray-500">Jumlah kepala keluarga terdaftar</p>
-                                @error('jumlah_penduduk')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 2: Anggaran Desa -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Anggaran Desa</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Anggaran Desa -->
-                            <div>
-                                <label for="anggaran_desa" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Total Anggaran Desa
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <div class="relative rounded-md shadow-sm">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span class="text-gray-500 sm:text-sm">Rp</span>
-                                    </div>
-                                    <input 
-                                        type="text" 
-                                        name="anggaran_desa" 
-                                        id="anggaran_desa" 
-                                        required
-                                        value="{{ old('anggaran_desa', number_format($data->anggaran_desa, 0, ',', '.')) }}"
-                                        class="focus:ring-gray-500 focus:border-gray-500 block w-full pl-10 pr-12 py-3 sm:text-sm border-gray-300 rounded-md"
-                                        placeholder="0"
-                                        oninput="formatCurrency(this)">
-                                </div>
-                                <p class="mt-1 text-xs text-gray-500">Total anggaran desa tahun berjalan</p>
-                                @error('anggaran_desa')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <!-- Anggaran Terpakai -->
-                            <div>
-                                <label for="anggaran_terpakai" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Anggaran Terpakai
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <div class="relative rounded-md shadow-sm">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <span class="text-gray-500 sm:text-sm">Rp</span>
-                                    </div>
-                                    <input 
-                                        type="text" 
-                                        name="anggaran_terpakai" 
-                                        id="anggaran_terpakai" 
-                                        required
-                                        value="{{ old('anggaran_terpakai', number_format($data->anggaran_terpakai, 0, ',', '.')) }}"
-                                        class="focus:ring-gray-500 focus:border-gray-500 block w-full pl-10 pr-12 py-3 sm:text-sm border-gray-300 rounded-md"
-                                        placeholder="0"
-                                        oninput="formatCurrency(this)">
-                                </div>
-                                <p class="mt-1 text-xs text-gray-500">Jumlah anggaran yang sudah digunakan</p>
-                                @error('anggaran_terpakai')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 3: Program & UMKM -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Program & UMKM</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Jumlah Program -->
-                            <div>
-                                <label for="jumlah_program" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Jumlah Program Berjalan
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="number" 
-                                    name="jumlah_program" 
-                                    id="jumlah_program" 
-                                    required
-                                    value="{{ old('jumlah_program', $data->jumlah_program) }}"
-                                    class="focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3 sm:text-sm border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Masukkan jumlah program">
-                                <p class="mt-1 text-xs text-gray-500">Total program yang sedang berjalan di desa</p>
-                                @error('jumlah_program')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <!-- Jumlah UMKM -->
-                            <div>
-                                <label for="jumlah_umkm" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Jumlah UMKM Terdaftar
-                                    <span class="text-red-500">*</span>
-                                </label>
-                                <input 
-                                    type="number" 
-                                    name="jumlah_umkm" 
-                                    id="jumlah_umkm" 
-                                    required
-                                    value="{{ old('jumlah_umkm', $data->jumlah_umkm) }}"
-                                    class="focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3 sm:text-sm border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Masukkan jumlah UMKM">
-                                <p class="mt-1 text-xs text-gray-500">Total UMKM yang terdaftar di desa</p>
-                                @error('jumlah_umkm')
-                                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 4: Prestasi & Keberhasilan -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Prestasi & Keberhasilan</h3>
-                        
-                        <!-- Prestasi -->
-                        <div class="mb-6">
-                            <label for="prestasi" class="block text-sm font-medium text-gray-700 mb-1">
-                                Prestasi Desa
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <textarea 
-                                name="prestasi" 
-                                id="prestasi" 
-                                rows="3"
-                                required
-                                class="focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3 sm:text-sm border-gray-300 rounded-md shadow-sm"
-                                placeholder="Masukkan prestasi desa terkini">{{ old('prestasi', $data->prestasi) }}</textarea>
-                            <p class="mt-1 text-xs text-gray-500">Prestasi atau penghargaan yang diraih desa</p>
-                            @error('prestasi')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Keberhasilan -->
-                        <div>
-                            <label for="keberhasilan" class="block text-sm font-medium text-gray-700 mb-1">
-                                Keberhasilan Desa
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <textarea 
-                                name="keberhasilan" 
-                                id="keberhasilan" 
-                                rows="3"
-                                required
-                                class="focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3 sm:text-sm border-gray-300 rounded-md shadow-sm"
-                                placeholder="Masukkan keberhasilan desa terkini">{{ old('keberhasilan', $data->keberhasilan) }}</textarea>
-                            <p class="mt-1 text-xs text-gray-500">Pencapaian atau keberhasilan program desa</p>
-                            @error('keberhasilan')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Section 5: Aktivitas Terkini -->
-                    <div class="mb-8">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-6 pb-2 border-b border-gray-200">Aktivitas Terkini</h3>
-                        
-                        <!-- Aktivitas Terkini -->
-                        <div>
-                            <label for="aktivitas_terkini" class="block text-sm font-medium text-gray-700 mb-1">
-                                Aktivitas Terkini Desa
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <textarea 
-                                name="aktivitas_terkini" 
-                                id="aktivitas_terkini" 
-                                rows="4"
-                                required
-                                class="focus:ring-gray-500 focus:border-gray-500 block w-full px-4 py-3 sm:text-sm border-gray-300 rounded-md shadow-sm"
-                                placeholder="Masukkan aktivitas terkini di desa">{{ old('aktivitas_terkini', $data->aktivitas_terkini) }}</textarea>
-                            <p class="mt-1 text-xs text-gray-500">Deskripsi kegiatan atau agenda terbaru di desa</p>
-                            @error('aktivitas_terkini')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Form Actions -->
-                    <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
-                        <a href="{{ route('data-desa.index') }}" class="inline-flex justify-center items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            Batal
-                        </a>
-                        <button type="submit" class="inline-flex justify-center items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 transition-colors duration-300">
-                            Update Data
-                            <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
+        @endif
+
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <form method="POST" action="{{ route('dashboard.edit', $beranda->id) }}">
+                @csrf
+                @method('PUT')
+                <div class="px-6 py-5 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Left Column -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="total_penduduk" class="block text-sm font-medium text-gray-700">Total Penduduk</label>
+                                <input type="number" name="total_penduduk" id="total_penduduk" value="{{ old('total_penduduk', $beranda->total_penduduk) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+
+                            <div>
+                                <label for="anggaran_desa" class="block text-sm font-medium text-gray-700">Anggaran Desa</label>
+                                <input type="number" name="anggaran_desa" id="anggaran_desa" value="{{ old('anggaran_desa', $beranda->anggaran_desa) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+
+                            <div>
+                                <label for="jumlah_program" class="block text-sm font-medium text-gray-700">Jumlah Program</label>
+                                <input type="number" name="jumlah_program" id="jumlah_program" value="{{ old('jumlah_program', $beranda->jumlah_program) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="jumlah_umkm" class="block text-sm font-medium text-gray-700">Jumlah UMKM</label>
+                                <input type="number" name="jumlah_umkm" id="jumlah_umkm" value="{{ old('jumlah_umkm', $beranda->jumlah_umkm) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+
+                            <div>
+                                <label for="penghargaan" class="block text-sm font-medium text-gray-700">Penghargaan</label>
+                                <input type="text" name="penghargaan" id="penghargaan" value="{{ old('penghargaan', $beranda->penghargaan) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+
+                            <div>
+                                <label for="anggaran_terpakai" class="block text-sm font-medium text-gray-700">Anggaran Terpakai</label>
+                                <input type="number" name="anggaran_terpakai" id="anggaran_terpakai" value="{{ old('anggaran_terpakai', $beranda->anggaran_terpakai) }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="aktivitas_terkini" class="block text-sm font-medium text-gray-700">Aktivitas Terkini</label>
+                        <textarea id="aktivitas_terkini" name="aktivitas_terkini" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm">{{ old('aktivitas_terkini', $beranda->aktivitas_terkini) }}</textarea>
+                    </div>
+
+                    <div class="flex justify-end pt-6">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            Update Data
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <script>
-        // Format currency input
-        function formatCurrency(input) {
-            // Remove non-digit characters
-            let value = input.value.replace(/\D/g, '');
-            
-            // Format with thousand separators
-            if (value.length > 0) {
-                value = parseInt(value).toLocaleString('id-ID');
-            }
-            
-            input.value = value;
-        }
-
-        // Convert formatted currency back to number before form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const currencyFields = ['anggaran_desa', 'anggaran_terpakai'];
-            
-            currencyFields.forEach(field => {
-                const input = document.getElementById(field);
-                if (input) {
-                    input.value = input.value.replace(/\D/g, '');
-                }
-            });
-        });
-    </script>
-</x-layout>
+</x-app-layout>

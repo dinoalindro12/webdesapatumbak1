@@ -47,9 +47,9 @@
                 <ul class="space-y-2">
                     <li><a href="{{ route('beranda') }}" class="text-gray-300 hover:text-white text-sm">Beranda</a></li>
                     <li><a href="{{ route('profil-desa.sejarah') }}" class="text-gray-300 hover:text-white text-sm">Profil Desa</a></li>
-                    <li><a href="{{ route('layanan.kesehatan') }}" class="text-gray-300 hover:text-white text-sm">Layanan</a></li>
-                    <li><a href="{{ route('berita-kegiatan.pengumuman') }}" class="text-gray-300 hover:text-white text-sm">Berita & Kegiatan</a></li>
-                    <li><a href="{{ route('galeri') }}" class="text-gray-300 hover:text-white text-sm">Galeri</a></li>
+                    <li><a href="{{ route('kesehatan.user') }}" class="text-gray-300 hover:text-white text-sm">Layanan</a></li>
+                    <li><a href="{{ route('pengumuman.user') }}" class="text-gray-300 hover:text-white text-sm">Berita & Kegiatan</a></li>
+                    <li><a href="{{ route('galeri.user') }}" class="text-gray-300 hover:text-white text-sm">Galeri</a></li>
                     <li><a href="{{ route('kontak.create') }}" class="text-gray-300 hover:text-white text-sm">Kontak</a></li>
                 </ul>
             </div>

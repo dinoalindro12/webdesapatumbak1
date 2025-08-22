@@ -74,7 +74,11 @@
                     <div class="h-48 bg-[url('https://images.unsplash.com/photo-1512678080530-7760d81faba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center relative">
                         <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
                         <div class="relative h-full flex items-center justify-center">
+<<<<<<< HEAD
                             <div class="bg-gray-700 text-white px-4 py-2 rounded-full text-sm font-medium">Untuk Ibu Hamil</div>
+=======
+                            <div class="bg-gray-700 text-white px-4 py-2 rounded-full text-sm font-medium">Untuk Ibu Hamil dan Balita</div>
+>>>>>>> b6c970c6faf7229af0ea8d47ce4c619ffef6edf3
                         </div>
                     </div>
                     <div class="p-6">
@@ -84,9 +88,9 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800">Persalinan Gratis</h3>
+                            <h3 class="text-xl font-bold text-gray-800">Posyandu</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Program bantuan persalinan untuk ibu hamil warga desa</p>
+                        <p class="text-gray-600 mb-4">Program ini untuk bertujuan untuk memantau kesehatan ibu dan anak.</p>
                         <ul class="space-y-2 text-gray-700">
                             <li class="flex items-start">
                                 <svg class="flex-shrink-0 h-5 w-5 text-gray-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -303,12 +307,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">08.00 - 12.00</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Pemeriksaan Ibu Hamil</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Posyandu</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Selasa</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">09.00 - 14.00</td>
                                 </tr>
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Imunisasi Anak</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Imunisasi Anak (Posyandu)</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Rabu</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">09.00 - 12.00</td>
                                 </tr>

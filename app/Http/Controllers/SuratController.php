@@ -27,9 +27,14 @@ class SuratController extends Controller
             'nik' => 'required|string|max:20',
             'nama' => 'required|string|max:100',
             'tanggal_lahir' => 'required|date',
-            'no_hp' => 'required|string|max:20',
+            // 'no_hp' => 'required|string|max:20', // DIHAPUS KARENA SUDAH TIDAK ADA DI FORM
+            'tempat_lahir' => 'required|string|max:100', // DITAMBAHKAN
+            'bangsa' => 'required|string|max:50', // DITAMBAHKAN
+            'agama' => 'required|string|max:50', // DITAMBAHKAN
+            'pekerjaan' => 'required|string|max:100', // DITAMBAHKAN
+            'tempat_tinggal' => 'required|string|max:255', // DITAMBAHKAN
             'jenis_surat' => 'required|string',
-            'alasan' => 'nullable|string',
+            'keperluan' => 'nullable|string', // DITAMBAHKAN (ganti alasan)
             'file-upload' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
@@ -42,15 +47,22 @@ class SuratController extends Controller
             'nik' => $validated['nik'],
             'nama' => $validated['nama'],
             'tanggal_lahir' => $validated['tanggal_lahir'],
-            'no_hp' => $validated['no_hp'],
+            // 'no_hp' => $validated['no_hp'], // DIHAPUS
+            'tempat_lahir' => $validated['tempat_lahir'], // DITAMBAHKAN
+            'bangsa' => $validated['bangsa'], // DITAMBAHKAN
+            'agama' => $validated['agama'], // DITAMBAHKAN
+            'pekerjaan' => $validated['pekerjaan'], // DITAMBAHKAN
+            'tempat_tinggal' => $validated['tempat_tinggal'], // DITAMBAHKAN
             'jenis_surat' => $validated['jenis_surat'],
-            'alasan' => $validated['alasan'] ?? null,
+            'keperluan' => $validated['keperluan'] ?? null, // DITAMBAHKAN (ganti alasan)
             'dokumen' => $dokumen,
             'status' => 'diajukan',
+            'tanggal_buat' => now(), // DITAMBAHKAN
         ]);
 
         return redirect()->back()->with('success', 'Permohonan surat berhasil diajukan!');
     }
+
     public function index()
     {
         $surats = Surat::paginate(20);
@@ -80,36 +92,58 @@ class SuratController extends Controller
     {
         $surat = Surat::findOrFail($id);
 
-        // Format tanggal lahir
+        // Generate nomor surat jika belum ada
+        if (!$surat->nomor_surat) {
+            $lastSurat = Surat::where('jenis_surat', $surat->jenis_surat)
+                ->whereNotNull('nomor_surat')
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $lastNumber = $lastSurat ? intval(explode('/', $lastSurat->nomor_surat)[0]) : 0;
+            $newNumber = $lastNumber + 1;
+
+            $surat->nomor_surat = $newNumber . '/SURAT/' . date('Y');
+            $surat->tanggal_cetak = now()->format('Y-m-d');
+            $surat->save();
+        }
+
+        // Format tanggal
         $tanggalLahir = $surat->tanggal_lahir
             ? Carbon::parse($surat->tanggal_lahir)->format('d/m/Y')
             : '-';
 
-        // Format tanggal buat
         Carbon::setLocale('id');
-        $tanggalBuat = Carbon::now()->translatedFormat('j F Y');
+        $tanggalBuat = \Carbon\Carbon::parse($surat->tanggal_cetak)
+        ->locale('id')
+        ->translatedFormat('j F Y');
 
-        // Sesuaikan path template dengan jenis surat
+        // Proses template
         $jenisTemplate = strtolower(str_replace(' ', '_', $surat->jenis_surat));
         $templatePath = storage_path("app/templates/{$jenisTemplate}.docx");
 
-        // Fallback template default jika tidak ada
         if (!file_exists($templatePath)) {
             $templatePath = storage_path('app/templates/default.docx');
         }
 
         $templateProcessor = new TemplateProcessor($templatePath);
 
-        // Mapping data ke template
+        // Set values baru
+        $templateProcessor->setValue('NO', explode('/', $surat->nomor_surat)[0]);
+        $templateProcessor->setValue('TAHUN', date('Y'));
         $templateProcessor->setValue('NAMA', $surat->nama);
         $templateProcessor->setValue('NIK', $surat->nik);
-        $templateProcessor->setValue('TANGGAL_LAHIR', $tanggalLahir);
-        $templateProcessor->setValue('NO_HP', $surat->no_hp);
-        $templateProcessor->setValue('ALASAN', $surat->alasan ?? '-');
-        $templateProcessor->setValue('TANGGAL_BUAT', $tanggalBuat);
+        $templateProcessor->setValue('TANGGAL_LAHIR', $surat->tanggal_lahir);
+        $templateProcessor->setValue('TEMPAT_LAHIR', $surat->tempat_lahir);
+        $templateProcessor->setValue('BANGSA', $surat->bangsa);
+        $templateProcessor->setValue('AGAMA', $surat->agama);
+        $templateProcessor->setValue('PEKERJAAN', $surat->pekerjaan);
+        $templateProcessor->setValue('TEMPAT_TINGGAL', $surat->tempat_tinggal);
+        $templateProcessor->setValue('TANGGAL_CETAK', $surat->tanggal_cetak);
+        $templateProcessor->setValue('KEPERLUAN', $surat->keperluan ?? '-');
+        $templateProcessor->setValue('TANGGAL_BUAT', $surat->tanggal_buat);
         $templateProcessor->setValue('JENIS_SURAT', $surat->jenis_surat);
 
-        // Simpan file
+        // Simpan dan download
         $fileName = 'Surat_' . $surat->jenis_surat . '_' . $surat->nik . '.docx';
         $outputPath = storage_path("app/generated/{$fileName}");
         $templateProcessor->saveAs($outputPath);

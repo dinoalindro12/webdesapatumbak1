@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beritas', function (Blueprint $table) {
+        Schema::create('beritas', callback: function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
             $table->string('title');
@@ -21,8 +21,8 @@ return new class extends Migration
             // $table->unsignedBigInteger('author_id');
             // $table->foreign('author_id')->references('id')->on('users'); // Optional field for author name
             $table->foreignId('author_id')->constrained('users',indexName:'posts_author_id');
-            $table->foreignId('category_id')->constrained('categories',indexName:'posts_category_id');
-            $table->string('kategori'); // Default status is 'draft'
+            $table->foreignId('category_id')->nullable()->constrained('categories',indexName:'posts_category_id');
+            $table->string('kategori'); // Kategori sebagai string untuk fleksibilitas
             $table->timestamps();
         });
 

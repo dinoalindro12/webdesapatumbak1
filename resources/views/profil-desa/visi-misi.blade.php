@@ -304,7 +304,7 @@
                 "Kemajuan yang berkelanjutan lahir dari kolaborasi dan kebijaksanaan bersama"
             </p>
             <div class="mt-6">
-                <a href="{{ route('kontak.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-light rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5">
+                <a href="{{ route('kontak.create') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-light rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5">
                     Kontak Kami
                     <svg class="ml-2 -mr-1 h-4 w-4 text-gray-400 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

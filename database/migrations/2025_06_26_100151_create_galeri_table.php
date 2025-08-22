@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('galeri', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->text('deskripsi')->nullable();
+            $table->string('link_video')->nullable();
+            $table->text('keterangan_video')->nullable();
             $table->string('gambar')->nullable();
-            $table->string('slug')->unique();
-            $table->string('kategori');
+            $table->string('keterangan_gambar')->nullable();
+            $table->date('tanggal');
             $table->timestamps();
         });
     }
