@@ -30,11 +30,22 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
-        $redirectTo = $request->redirect
-            ? route($request->redirect)
-            : ($user->role === 'admin' ? route('dashboard.index') : route('layanan.surat-menyurat'));
 
-        return redirect()->to($redirectTo);
+        // Redirect ke URL yang diminta sebelumnya atau default berdasarkan role
+        if ($user->role === 'admin') {
+            return redirect()->intended(route('dashboard.index'));
+        } else {
+            // Untuk user guest, redirect ke halaman surat-menyurat
+            return redirect()->intended(route('layanan.surat-menyurat'));
+        }
+    }
+
+    // ConfirmablePasswordController.php
+    protected function redirectBasedOnRole($user): RedirectResponse
+    {
+        return redirect()->intended(
+            $user->role === 'admin' ? route('dashboard.index') : route('layanan.surat-menyurat')
+        );
     }
 
     /**

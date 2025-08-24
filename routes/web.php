@@ -63,19 +63,23 @@ Route::get('galeri.index', [GaleriController::class, 'indexUser'])->name('galeri
 Route::get('kontak/create', [KontakController::class, 'create'])->name('kontak.create');
 Route::post('kontak', [KontakController::class, 'store'])->name('kontak.store');
 
-// Surat Menyurat (Publik)
-Route::get('layanan/surat-menyurat', [SuratController::class, 'create'])->name('layanan.surat-menyurat');
+// Di file web.php
+
+Route::get('layanan/surat-menyurat', [SuratController::class, 'indexGuest'])->name('layanan.surat-menyurat');
+Route::post('layanan/surat-menyurat', [SuratController::class, 'store'])->name('layanan.surat-menyurat.store');
+Route::get('/surat-menyurat/get-form/{jenisSurat}', [SuratController::class, 'getForm'])->name('surat-menyurat.get-form');
 
 // Surat Menyurat (Admin)
+// Ubah route surat-menyurat untuk admin
 Route::middleware(['auth', 'verified'])->prefix('surat-menyurat')->group(function () {
     Route::get('/', [SuratController::class, 'index'])->name('surat-menyurat.index');
+    Route::get('/{source}/{id}', [SuratController::class, 'show'])->name('surat-menyurat.show');
+    Route::delete('/{source}/{id}', [SuratController::class, 'destroy'])->name('surat-menyurat.destroy');
     Route::post('/', [SuratController::class, 'store'])->name('surat-menyurat.store');
-    Route::get('/{surat}', [SuratController::class, 'show'])->name('surat-menyurat.show');
     Route::get('/{surat}/edit', [SuratController::class, 'edit'])->name('surat-menyurat.edit');
-    Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('surat-menyurat.destroy');
     // Route::get('/{id}/show', [SuratController::class, 'show'])->name('surat-menyurat.show');
-    Route::get('/{id}/print', [SuratController::class, 'createSurat'])->name('surat-menyurat.print');
-    Route::get('surat-menyurat/create', [SuratController::class, 'create'])->name('surat-menyurat.create');
+    Route::get('/{source}/{id}/print', [SuratController::class, 'createSurat'])->name('surat-menyurat.print');
+    Route::get('/create', [SuratController::class, 'create'])->name('surat-menyurat.create');
 });
 
 // Kontak (Admin)
@@ -120,4 +124,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
 });
 
-require __DIR__.'/auth.php';
+// Di file web.php
+Route::get('require-login', function () {
+    return view('auth.require-login', [
+        'message' => 'Anda harus login untuk mengakses halaman ini.',
+        'route' => request()->redirect ?? url()->previous()
+    ]);
+})->name('auth.require-login');
+
+require __DIR__ . '/auth.php';

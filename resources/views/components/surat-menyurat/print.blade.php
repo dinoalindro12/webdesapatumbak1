@@ -33,12 +33,8 @@
                                         <tr>
                                             <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Tanggal
                                                 Lahir</td>
-                                            <td class="px-6 py-3">{{ $surat->tanggal_lahir }}</td>
+                                            <td class="px-6 py-3">{{ $surat->tanggal_lahir->format('d-m-Y') }}</td>
                                         </tr>
-                                        <!-- <tr>
-                                            <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Nomor HP</td>
-                                            <td class="px-6 py-3">{{ $surat->no_hp }}</td>
-                                        </tr> -->
                                         <tr>
                                             <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Tempat
                                                 Lahir</td>
@@ -79,11 +75,6 @@
                                                 Surat</td>
                                             <td class="px-6 py-3">{{ $surat->jenis_surat }}</td>
                                         </tr>
-                                        <!-- <tr>
-                                            <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Alasan
-                                            </td>
-                                            <td class="px-6 py-3">{{ $surat->alasan ?? '-' }}</td>
-                                        </tr> -->
                                         <tr>
                                             <td class="px-6 py-3 font-semibold text-gray-600 dark:text-gray-200">Dokumen
                                             </td>

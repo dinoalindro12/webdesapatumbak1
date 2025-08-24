@@ -17,7 +17,7 @@
             <div class="mt-8 flex justify-center space-x-4">
                 <a href="{{ url('/') }}"
                     class="w-1/2 flex justify-center py-2 px-4 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    Kembali
+                    Kembali ke Beranda
                 </a>
                 <a href="{{ route('login', ['redirect' => $route]) }}"
                     class="w-1/2 flex justify-center py-2 px-4 border border-transparent rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
