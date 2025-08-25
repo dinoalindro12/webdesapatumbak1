@@ -60,6 +60,14 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "mkdir -p database",
+            "touch database/database.sqlite",
+            "chmod 755 database/database.sqlite",
+            "php artisan migrate --force"
         ]
     },
     "extra": {
