@@ -113,7 +113,7 @@ class BeritaController extends Controller
             'title' => 'required|string|max:255',
             'body' => 'required|string',
             'date' => 'required|date',
-            'kategori' => 'required|string|max:50',
+            'category_id' => 'required|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
